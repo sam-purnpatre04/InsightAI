@@ -61,8 +61,3 @@ The goal of InsightAI is to simplify business data analysis for non-technical us
 
 🚧 Currently under development.
 
-This project is being built step by step following industry-standard software engineering practices.
-
-
-
-**Samruddhi Purnpatre**
