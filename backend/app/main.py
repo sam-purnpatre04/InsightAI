@@ -1,9 +1,10 @@
 from fastapi import FastAPI
+from backend.app.api.upload import router as upload_router
 
-# Create the FastAPI application
 app = FastAPI()
 
-# Home route
+app.include_router(upload_router)
+
 @app.get("/")
 def home():
     return {
