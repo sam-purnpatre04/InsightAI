@@ -1,5 +1,5 @@
 import pandas as pd
-
+from backend.app.services.profiling_service import get_dataset_profile
 from backend.app.services.cleaning_service import clean_dataset
 
 
@@ -13,18 +13,7 @@ def read_csv(upload_file):
     df = pd.read_csv(upload_file.file)
 
     # ----------------------------
-    # Dataset Profile
-    # ----------------------------
-
-    rows = df.shape[0]
-    columns = df.shape[1]
-
-    column_names = df.columns.tolist()
-
-    data_types = {
-        column: str(dtype)
-        for column, dtype in df.dtypes.items()
-    }
+    dataset_profile = get_dataset_profile(df)
 
     missing_values = df.isnull().sum().to_dict()
 
@@ -54,18 +43,7 @@ def read_csv(upload_file):
 
         "filename": upload_file.filename,
 
-        "dataset_profile": {
-            "rows": rows,
-            "columns": columns,
-            "column_names": column_names,
-            "data_types": data_types,
-            "missing_values": missing_values,
-            "duplicate_rows": duplicate_rows,
-            "memory_usage_kb": memory_usage,
-            "numerical_columns": numerical_columns,
-            "categorical_columns": categorical_columns
-        },
-
+       "dataset_profile": dataset_profile,
         "cleaning_summary": cleaning_summary
 
     }
