@@ -5,6 +5,7 @@ from backend.app.services.cleaning_service import clean_dataset
 from backend.app.services.eda_service import generate_eda
 from backend.app.services.insights_service import generate_insights
 from backend.app.services.visualization_service import generate_visualizations
+from backend.app.services.report_service import generate_report
 
 
 def read_csv(upload_file):
@@ -39,13 +40,21 @@ def read_csv(upload_file):
         cleaning_summary,
         eda
     )
+    report = generate_report(
+    upload_file.filename,
+    dataset_profile,
+    cleaning_summary,
+    eda,
+    insights
+)
 
     # Return Response
     return {
-        "filename": upload_file.filename,
-        "dataset_profile": dataset_profile,
-        "cleaning_summary": cleaning_summary,
-        "eda": eda,
-        "business_insights": insights,
-        "generated_charts": charts
-    }
+    "filename": upload_file.filename,
+    "dataset_profile": dataset_profile,
+    "cleaning_summary": cleaning_summary,
+    "eda": eda,
+    "business_insights": insights,
+    "generated_charts": charts,
+    "report": report
+}
