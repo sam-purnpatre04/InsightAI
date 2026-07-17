@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { uploadDataset } from "../services/api";
 
-function Upload({ setResult }) {
+function Upload({ setData }) {
   const [file, setFile] = useState(null);
-
   const [loading, setLoading] = useState(false);
 
   const handleUpload = async () => {
@@ -15,12 +14,12 @@ function Upload({ setResult }) {
     try {
       setLoading(true);
 
-      const data = await uploadDataset(file);
+      const result = await uploadDataset(file);
 
-      setResult(data);
+      setData(result);
+
     } catch (error) {
       console.error(error);
-
       alert("Upload failed.");
     } finally {
       setLoading(false);
@@ -31,6 +30,7 @@ function Upload({ setResult }) {
     <div
       style={{
         marginBottom: "30px",
+        textAlign: "center",
       }}
     >
       <input

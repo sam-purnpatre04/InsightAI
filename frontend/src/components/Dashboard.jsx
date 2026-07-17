@@ -1,13 +1,13 @@
 import SummaryCards from "./SummaryCards";
 import Insights from "./Insights";
 import Charts from "./Charts";
+import Report from "./Report";
 
 function Dashboard({ data }) {
   if (!data) return null;
 
   return (
     <div style={{ marginTop: "30px" }}>
-
       <h1
         style={{
           textAlign: "center",
@@ -30,6 +30,8 @@ function Dashboard({ data }) {
       {/* Charts */}
       <Charts charts={data.generated_charts} />
 
+      {/* Final Report */}
+      <Report report={data.report} />
     </div>
   );
 }
