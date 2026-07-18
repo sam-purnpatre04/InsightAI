@@ -1,3 +1,5 @@
+import "./Dashboard.css";
+
 import SummaryCards from "./SummaryCards";
 import Insights from "./Insights";
 import Charts from "./Charts";
@@ -7,31 +9,23 @@ function Dashboard({ data }) {
   if (!data) return null;
 
   return (
-    <div style={{ marginTop: "30px" }}>
-      <h1
-        style={{
-          textAlign: "center",
-          marginBottom: "30px",
-          color: "#2c3e50",
-        }}
-      >
-        InsightAI Dashboard
+    <div className="dashboard-container">
+
+      <h1 className="dashboard-title">
+        📊 InsightAI Dashboard
       </h1>
 
-      {/* Summary Cards */}
       <SummaryCards
         profile={data.dataset_profile}
         cleaning={data.cleaning_summary}
       />
 
-      {/* Business Insights */}
       <Insights insights={data.business_insights} />
 
-      {/* Charts */}
       <Charts charts={data.generated_charts} />
 
-      {/* Final Report */}
       <Report report={data.report} />
+
     </div>
   );
 }
