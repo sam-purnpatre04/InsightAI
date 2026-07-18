@@ -1,40 +1,40 @@
+import "./Charts.css";
+
 function Charts({ charts }) {
   if (!charts || charts.length === 0) return null;
 
   return (
-    <div style={{ marginTop: "40px" }}>
-      <h2>Generated Charts</h2>
+    <div className="charts-container">
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px,1fr))",
-          gap: "20px",
-        }}
-      >
+      <h2 className="charts-title">
+        📈 Generated Charts
+      </h2>
+
+      <div className="charts-grid">
+
         {charts.map((chart, index) => (
-          <div
-            key={index}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "10px",
-              padding: "15px",
-              textAlign: "center",
-            }}
-          >
-            <h4>{chart}</h4>
+
+          <div className="chart-card" key={index}>
+
+            <h3>
+              {chart
+                .replace(".png", "")
+                .replaceAll("_", " ")
+                .replace(/\b\w/g, (c) => c.toUpperCase())}
+            </h3>
 
             <img
               src={`http://127.0.0.1:8000/reports/${chart}`}
               alt={chart}
-              style={{
-                width: "100%",
-                borderRadius: "8px",
-              }}
+              className="chart-image"
             />
+
           </div>
+
         ))}
+
       </div>
+
     </div>
   );
 }
