@@ -8,73 +8,124 @@ from backend.app.services.visualization_service import generate_visualizations
 from backend.app.services.report_service import generate_report
 
 
-encodings = [
-    "utf-8",
-    "utf-8-sig",
-    "cp1252",
-    "latin1",
-    "ISO-8859-1",
-]
-
-df = None
-
-for encoding in encodings:
-    try:
-        upload_file.file.seek(0)
-        df = pd.read_csv(upload_file.file, encoding=encoding)
-        print(f"Loaded using encoding: {encoding}")
-        break
-    except UnicodeDecodeError:
-        continue
-
-if df is None:
-    raise Exception("Unable to read CSV. Unsupported file encoding.")
+def read_csv(upload_file):
     """
-    Reads an uploaded CSV file,
-    profiles it,
-    cleans it,
-    performs EDA,
-    generates charts,
-    and returns business insights.
+    Reads uploaded CSV files with automatic encoding detection,
+    performs profiling, cleaning, EDA, visualization,
+    business insight generation and report generation.
     """
 
-    # Read CSV
-    df = pd.read_csv(upload_file.file)
+    # -----------------------------
+    # Read CSV with multiple encodings
+    # -----------------------------
 
+    encodings = [
+        "utf-8",
+        "utf-8-sig",
+        "cp1252",
+        "latin1",
+        "ISO-8859-1",
+    ]
+
+    df = None
+
+    last_error = None
+
+    for encoding in encodings:
+
+        try:
+
+            upload_file.file.seek(0)
+
+            df = pd.read_csv(
+                upload_file.file,
+                encoding=encoding,
+                low_memory=False
+            )
+
+            print(f"CSV loaded successfully using {encoding}")
+
+            break
+
+        except UnicodeDecodeError as e:
+
+            last_error = e
+
+        except Exception as e:
+
+            last_error = e
+
+    if df is None:
+
+        raise Exception(
+            f"Unable to read uploaded CSV.\n{last_error}"
+        )
+
+    # -----------------------------
     # Dataset Profile
+    # -----------------------------
+
     dataset_profile = get_dataset_profile(df)
 
-    # Clean Dataset
+    # -----------------------------
+    # Cleaning
+    # -----------------------------
+
     cleaned_df, cleaning_summary = clean_dataset(df)
 
-    # Exploratory Data Analysis
+    # -----------------------------
+    # EDA
+    # -----------------------------
+
     eda = generate_eda(cleaned_df)
 
-    # Generate Charts
+    # -----------------------------
+    # Charts
+    # -----------------------------
+
     charts = generate_visualizations(cleaned_df)
 
-    # Business Insights
+    # -----------------------------
+    # AI Insights
+    # -----------------------------
+
     insights = generate_insights(
         cleaned_df,
         dataset_profile,
         cleaning_summary,
         eda
     )
-    report = generate_report(
-    upload_file.filename,
-    dataset_profile,
-    cleaning_summary,
-    eda,
-    insights
-)
 
-    # Return Response
+    # -----------------------------
+    # Final Report
+    # -----------------------------
+
+    report = generate_report(
+        upload_file.filename,
+        dataset_profile,
+        cleaning_summary,
+        eda,
+        insights
+    )
+
+    # -----------------------------
+    # Response
+    # -----------------------------
+
     return {
-    "filename": upload_file.filename,
-    "dataset_profile": dataset_profile,
-    "cleaning_summary": cleaning_summary,
-    "eda": eda,
-    "business_insights": insights,
-    "generated_charts": charts,
-    "report": report
-}
+
+        "filename": upload_file.filename,
+
+        "dataset_profile": dataset_profile,
+
+        "cleaning_summary": cleaning_summary,
+
+        "eda": eda,
+
+        "business_insights": insights,
+
+        "generated_charts": charts,
+
+        "report": report
+
+    }
