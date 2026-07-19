@@ -5,9 +5,11 @@ import Upload from "./components/Upload";
 import Dashboard from "./components/Dashboard";
 
 function App() {
+
   const [data, setData] = useState(null);
 
   return (
+
     <div className="app">
 
       <header className="header">
@@ -17,9 +19,14 @@ function App() {
 
       <Upload setData={setData} />
 
-      {data && <Dashboard data={data} />}
+      <div className="dashboard">
+
+        {data && <Dashboard data={data} />}
+
+      </div>
 
     </div>
+
   );
 }
 

@@ -8,7 +8,27 @@ from backend.app.services.visualization_service import generate_visualizations
 from backend.app.services.report_service import generate_report
 
 
-def read_csv(upload_file):
+encodings = [
+    "utf-8",
+    "utf-8-sig",
+    "cp1252",
+    "latin1",
+    "ISO-8859-1",
+]
+
+df = None
+
+for encoding in encodings:
+    try:
+        upload_file.file.seek(0)
+        df = pd.read_csv(upload_file.file, encoding=encoding)
+        print(f"Loaded using encoding: {encoding}")
+        break
+    except UnicodeDecodeError:
+        continue
+
+if df is None:
+    raise Exception("Unable to read CSV. Unsupported file encoding.")
     """
     Reads an uploaded CSV file,
     profiles it,
