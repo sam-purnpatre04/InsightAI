@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from backend.app.api.upload import router as upload_router
 
@@ -17,7 +18,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Upload API
 app.include_router(upload_router)
+
+# Serve generated charts
+app.mount("/reports", StaticFiles(directory="reports"), name="reports")
 
 
 @app.get("/")
