@@ -163,8 +163,92 @@ def missing_values_chart(df):
         "missing_values.png"
     )
 
+# ======================================================
+# SCATTER PLOT
+# ======================================================
+
+def scatter_plot(df, numeric_columns):
+
+    if len(numeric_columns) < 2:
+        return None
+
+    x = numeric_columns[0]
+    y = numeric_columns[1]
+
+    plt.figure(figsize=(8,6))
+
+    sns.scatterplot(
+        data=df,
+        x=x,
+        y=y,
+        color="royalblue"
+    )
+
+    plt.title(f"{x} vs {y}")
+
+    return save_chart(f"{x}_vs_{y}_scatter.png")
 
 # ======================================================
+# CORRELATION HEATMAP
+# ======================================================
+
+def correlation_heatmap(df):
+
+    numeric_df = df.select_dtypes(include=np.number)
+
+    if numeric_df.shape[1] < 2:
+        return None
+
+    plt.figure(figsize=(10,7))
+
+    sns.heatmap(
+        numeric_df.corr(),
+        annot=True,
+        cmap="coolwarm",
+        linewidths=0.5,
+        fmt=".2f"
+    )
+
+    plt.title("Correlation Heatmap")
+
+    return save_chart("correlation_heatmap.png")
+
+# ======================================================
+# LINE CHART
+# ======================================================
+
+def line_chart(df):
+
+    date_column = detect_datetime_column(df)
+
+    if date_column is None:
+        return None
+
+    numeric_columns = get_numeric_columns(df)
+
+    if len(numeric_columns) == 0:
+        return None
+
+    value_column = numeric_columns[0]
+
+    temp = df.sort_values(date_column)
+
+    plt.figure(figsize=(12,6))
+
+    sns.lineplot(
+        data=temp,
+        x=date_column,
+        y=value_column,
+        color="green"
+    )
+
+    plt.title(f"{value_column} Trend")
+
+    plt.xticks(rotation=45)
+
+    return save_chart(f"{value_column}_trend.png")
+
+## ======================================================
 # MAIN FUNCTION
 # ======================================================
 
@@ -174,46 +258,72 @@ def generate_visualizations(df: pd.DataFrame):
 
     numeric_columns = get_numeric_columns(df)
 
-    # Histograms + Boxplots
+    # ------------------------------------------
+    # Histogram & Boxplot for every numeric column
+    # ------------------------------------------
 
     for column in numeric_columns:
 
         try:
-
-            generated_files.append(
-                histogram(df, column)
-            )
-
+            generated_files.append(histogram(df, column))
         except Exception as e:
-
-            print(
-                f"Histogram Error ({column}): {e}"
-            )
+            print(f"Histogram Error ({column}): {e}")
 
         try:
-
-            generated_files.append(
-                boxplot(df, column)
-            )
-
+            generated_files.append(boxplot(df, column))
         except Exception as e:
+            print(f"Boxplot Error ({column}): {e}")
 
-            print(
-                f"Boxplot Error ({column}): {e}"
-            )
-
-    # Missing Values
+    # ------------------------------------------
+    # Scatter Plot
+    # ------------------------------------------
 
     try:
+        scatter = scatter_plot(df, numeric_columns)
 
+        if scatter:
+            generated_files.append(scatter)
+
+    except Exception as e:
+        print(f"Scatter Error: {e}")
+
+    # ------------------------------------------
+    # Correlation Heatmap
+    # ------------------------------------------
+
+    try:
+        heatmap = correlation_heatmap(df)
+
+        if heatmap:
+            generated_files.append(heatmap)
+
+    except Exception as e:
+        print(f"Heatmap Error: {e}")
+
+    # ------------------------------------------
+    # Line Chart
+    # ------------------------------------------
+
+    try:
+        trend = line_chart(df)
+
+        if trend:
+            generated_files.append(trend)
+
+    except Exception as e:
+        print(f"Line Chart Error: {e}")
+
+    # ------------------------------------------
+    # Missing Values Chart
+    # ------------------------------------------
+
+    try:
         missing = missing_values_chart(df)
 
         if missing:
-
             generated_files.append(missing)
 
     except Exception as e:
-
-        print(e)
+        print(f"Missing Values Chart Error: {e}")
 
     return generated_files
