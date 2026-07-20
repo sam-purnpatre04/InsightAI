@@ -67,25 +67,25 @@ def detect_datetime_column(df):
 
     for column in df.columns:
 
+        if pd.api.types.is_datetime64_any_dtype(df[column]):
+            return column
+
         try:
 
             converted = pd.to_datetime(
                 df[column],
-                errors="coerce"
+                errors="coerce",
+                infer_datetime_format=True
             )
 
-            if converted.notna().sum() > len(df) * 0.70:
-
+            if converted.notna().mean() >= 0.7:
                 df[column] = converted
-
                 return column
 
-        except:
-
-            pass
+        except Exception:
+            continue
 
     return None
-
 
 # ======================================================
 # HISTOGRAM
@@ -175,10 +175,15 @@ def scatter_plot(df, numeric_columns):
     x = numeric_columns[0]
     y = numeric_columns[1]
 
-    plt.figure(figsize=(8,6))
+    temp = df[[x, y]].dropna()
+
+    if temp.empty:
+        return None
+
+    plt.figure(figsize=(8, 6))
 
     sns.scatterplot(
-        data=df,
+        data=temp,
         x=x,
         y=y,
         color="royalblue"
@@ -199,14 +204,17 @@ def correlation_heatmap(df):
     if numeric_df.shape[1] < 2:
         return None
 
-    plt.figure(figsize=(10,7))
+    corr = numeric_df.corr(numeric_only=True)
+
+    plt.figure(figsize=(10, 8))
 
     sns.heatmap(
-        numeric_df.corr(),
+        corr,
         annot=True,
         cmap="coolwarm",
+        fmt=".2f",
         linewidths=0.5,
-        fmt=".2f"
+        square=True
     )
 
     plt.title("Correlation Heatmap")
@@ -226,29 +234,107 @@ def line_chart(df):
 
     numeric_columns = get_numeric_columns(df)
 
-    if len(numeric_columns) == 0:
+    if not numeric_columns:
         return None
 
     value_column = numeric_columns[0]
 
-    temp = df.sort_values(date_column)
+    temp = (
+        df[[date_column, value_column]]
+        .dropna()
+        .sort_values(date_column)
+    )
 
-    plt.figure(figsize=(12,6))
+    if temp.empty:
+        return None
+
+    plt.figure(figsize=(12, 6))
 
     sns.lineplot(
         data=temp,
         x=date_column,
         y=value_column,
+        marker="o",
         color="green"
     )
 
-    plt.title(f"{value_column} Trend")
+    plt.title(f"{value_column} Trend Over Time")
+
+    plt.xlabel(date_column)
+
+    plt.ylabel(value_column)
 
     plt.xticks(rotation=45)
 
     return save_chart(f"{value_column}_trend.png")
 
-## ======================================================
+# ======================================================
+# BAR CHART
+# ======================================================
+
+def bar_chart(df, column):
+
+    value_counts = (
+        df[column]
+        .fillna("Missing")
+        .value_counts()
+        .head(10)
+    )
+
+    if value_counts.empty:
+        return None
+
+    plt.figure(figsize=(10, 6))
+
+    sns.barplot(
+        x=value_counts.index,
+        y=value_counts.values,
+        palette="viridis"
+    )
+
+    plt.title(f"{column} Distribution")
+
+    plt.xlabel(column)
+
+    plt.ylabel("Count")
+
+    plt.xticks(rotation=45)
+
+    return save_chart(f"{column}_bar_chart.png")
+
+
+# ======================================================
+# PIE CHART
+# ======================================================
+
+def pie_chart(df, column):
+
+    value_counts = (
+        df[column]
+        .fillna("Missing")
+        .value_counts()
+        .head(8)
+    )
+
+    if value_counts.empty:
+        return None
+
+    plt.figure(figsize=(7, 7))
+
+    plt.pie(
+        value_counts.values,
+        labels=value_counts.index,
+        autopct="%1.1f%%",
+        startangle=90
+    )
+
+    plt.title(f"{column} Distribution")
+
+    plt.axis("equal")
+
+    return save_chart(f"{column}_pie_chart.png")
+
+# ======================================================
 # MAIN FUNCTION
 # ======================================================
 
@@ -259,18 +345,22 @@ def generate_visualizations(df: pd.DataFrame):
     numeric_columns = get_numeric_columns(df)
 
     # ------------------------------------------
-    # Histogram & Boxplot for every numeric column
+    # Histogram & Boxplot
     # ------------------------------------------
 
     for column in numeric_columns:
 
         try:
-            generated_files.append(histogram(df, column))
+            chart = histogram(df, column)
+            if chart:
+                generated_files.append(chart)
         except Exception as e:
             print(f"Histogram Error ({column}): {e}")
 
         try:
-            generated_files.append(boxplot(df, column))
+            chart = boxplot(df, column)
+            if chart:
+                generated_files.append(chart)
         except Exception as e:
             print(f"Boxplot Error ({column}): {e}")
 
@@ -279,10 +369,10 @@ def generate_visualizations(df: pd.DataFrame):
     # ------------------------------------------
 
     try:
-        scatter = scatter_plot(df, numeric_columns)
+        chart = scatter_plot(df, numeric_columns)
 
-        if scatter:
-            generated_files.append(scatter)
+        if chart:
+            generated_files.append(chart)
 
     except Exception as e:
         print(f"Scatter Error: {e}")
@@ -292,10 +382,10 @@ def generate_visualizations(df: pd.DataFrame):
     # ------------------------------------------
 
     try:
-        heatmap = correlation_heatmap(df)
+        chart = correlation_heatmap(df)
 
-        if heatmap:
-            generated_files.append(heatmap)
+        if chart:
+            generated_files.append(chart)
 
     except Exception as e:
         print(f"Heatmap Error: {e}")
@@ -305,10 +395,10 @@ def generate_visualizations(df: pd.DataFrame):
     # ------------------------------------------
 
     try:
-        trend = line_chart(df)
+        chart = line_chart(df)
 
-        if trend:
-            generated_files.append(trend)
+        if chart:
+            generated_files.append(chart)
 
     except Exception as e:
         print(f"Line Chart Error: {e}")
@@ -318,12 +408,38 @@ def generate_visualizations(df: pd.DataFrame):
     # ------------------------------------------
 
     try:
-        missing = missing_values_chart(df)
+        chart = missing_values_chart(df)
 
-        if missing:
-            generated_files.append(missing)
+        if chart:
+            generated_files.append(chart)
 
     except Exception as e:
         print(f"Missing Values Chart Error: {e}")
+
+    # ------------------------------------------
+    # Bar Charts & Pie Charts
+    # ------------------------------------------
+
+    categorical_columns = get_categorical_columns(df)
+
+    for column in categorical_columns:
+
+        try:
+            chart = bar_chart(df, column)
+
+            if chart:
+                generated_files.append(chart)
+
+        except Exception as e:
+            print(f"Bar Chart Error ({column}): {e}")
+
+        try:
+            chart = pie_chart(df, column)
+
+            if chart:
+                generated_files.append(chart)
+
+        except Exception as e:
+            print(f"Pie Chart Error ({column}): {e}")
 
     return generated_files
