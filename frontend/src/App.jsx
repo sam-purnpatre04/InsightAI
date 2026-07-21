@@ -5,28 +5,67 @@ import Upload from "./components/Upload";
 import Dashboard from "./components/Dashboard";
 
 function App() {
-
   const [data, setData] = useState(null);
 
   return (
-
     <div className="app">
 
-      <header className="header">
-        <h1>📊 InsightAI</h1>
-        <p>AI Powered Business Intelligence Platform</p>
+      {/* Background Decorative Shapes */}
+      <div className="bg-circle bg-circle-1"></div>
+      <div className="bg-circle bg-circle-2"></div>
+
+      {/* Hero Header */}
+      <header className="hero">
+
+        <div className="hero-content">
+
+          <div className="logo">
+            📊
+          </div>
+
+          <div>
+
+            <h1>InsightAI</h1>
+
+            <p>
+              AI Powered Business Intelligence Platform
+            </p>
+
+          </div>
+
+        </div>
+
+        <div className="hero-right">
+
+          <span className="status-dot"></span>
+
+          Ready
+
+        </div>
+
       </header>
 
-      <Upload setData={setData} />
+      {/* Upload Section */}
 
-      <div className="dashboard">
+      <section className="upload-wrapper">
 
-        {data && <Dashboard data={data} />}
+        <Upload setData={setData} />
 
-      </div>
+      </section>
+
+      {/* Dashboard */}
+
+      {data && (
+
+        <main className="dashboard-wrapper">
+
+          <Dashboard data={data} />
+
+        </main>
+
+      )}
 
     </div>
-
   );
 }
 

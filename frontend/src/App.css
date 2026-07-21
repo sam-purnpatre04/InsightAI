@@ -1,163 +1,311 @@
-/* =========================
-   GOOGLE FONT
-========================= */
+/* =====================================================
+GOOGLE FONT
+===================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-/* =========================
-   GLOBAL
-========================= */
+/* =====================================================
+GLOBAL
+===================================================== */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+    font-family:"Poppins",sans-serif;
 }
 
 body{
-    background:#f4f7fc;
-    color:#222;
+
+    background:#f5f7fb;
+
+    color:#1e293b;
+
+    overflow-x:hidden;
 }
 
-/* =========================
-   MAIN APP
-========================= */
+/* =====================================================
+APP
+===================================================== */
 
 .app{
 
-    width:100%;
+    position:relative;
+
     min-height:100vh;
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    padding:40px;
 
-    padding:40px 20px 80px;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* =====================================================
+BACKGROUND
+===================================================== */
 
-.header{
+.bg-circle{
 
-    width:100%;
-    max-width:1200px;
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(80px);
+
+    opacity:.20;
+
+    z-index:-1;
+
+}
+
+.bg-circle-1{
+
+    width:350px;
+
+    height:350px;
+
+    background:#3b82f6;
+
+    top:-80px;
+
+    left:-80px;
+
+}
+
+.bg-circle-2{
+
+    width:350px;
+
+    height:350px;
+
+    background:#8b5cf6;
+
+    right:-120px;
+
+    bottom:-100px;
+
+}
+
+/* =====================================================
+HEADER
+===================================================== */
+
+.hero{
+
+    max-width:1500px;
+
+    margin:auto;
+
+    margin-bottom:35px;
 
     background:white;
+
+    border-radius:22px;
+
+    padding:30px 40px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+
+}
+
+.hero-content{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.logo{
+
+    width:70px;
+
+    height:70px;
 
     border-radius:18px;
 
-    padding:35px;
-
-    text-align:center;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-    margin-bottom:35px;
-}
-
-.header h1{
-
-    font-size:42px;
-
-    font-weight:700;
-
-    color:#1565c0;
-
-    margin-bottom:10px;
-}
-
-.header p{
-
-    font-size:18px;
-
-    color:#666;
-}
-
-/* =========================
-   DASHBOARD CONTAINER
-========================= */
-
-.dashboard{
-
-    width:100%;
-    max-width:1200px;
-
-    margin:auto;
-}
-
-/* =========================
-   SECTION STYLE
-========================= */
-
-.section{
-
-    background:white;
-
-    border-radius:16px;
-
-    padding:25px;
-
-    margin-top:30px;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.07);
-}
-
-.section h2{
-
-    margin-bottom:20px;
-
-    color:#1565c0;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-button{
-
-    background:#1565c0;
+    background:linear-gradient(135deg,#2563eb,#60a5fa);
 
     color:white;
 
-    border:none;
+    display:flex;
 
-    padding:14px 28px;
+    justify-content:center;
 
-    border-radius:10px;
+    align-items:center;
+
+    font-size:32px;
+
+    box-shadow:0 8px 18px rgba(37,99,235,.25);
+
+}
+
+.hero h1{
+
+    font-size:40px;
+
+    color:#1e293b;
+
+    margin-bottom:6px;
+
+    font-weight:700;
+
+}
+
+.hero p{
+
+    color:#64748b;
 
     font-size:16px;
 
+}
+
+.hero-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#ecfdf5;
+
+    color:#059669;
+
+    padding:12px 18px;
+
+    border-radius:40px;
+
     font-weight:600;
+
+    font-size:14px;
+
+}
+
+.status-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#10b981;
+
+}
+
+/* =====================================================
+UPLOAD
+===================================================== */
+
+.upload-wrapper{
+
+    max-width:1500px;
+
+    margin:auto;
+
+    margin-bottom:35px;
+
+}
+
+/* =====================================================
+DASHBOARD
+===================================================== */
+
+.dashboard-wrapper{
+
+    max-width:1500px;
+
+    margin:auto;
+
+}
+
+/* =====================================================
+BUTTON
+===================================================== */
+
+button{
+
+    border:none;
 
     cursor:pointer;
 
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+
+    color:white;
+
+    padding:14px 30px;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    font-weight:600;
+
     transition:.3s;
+
+    box-shadow:0 8px 18px rgba(37,99,235,.25);
+
 }
 
 button:hover{
 
-    background:#0d47a1;
+    transform:translateY(-3px);
 
-    transform:translateY(-2px);
+    box-shadow:0 12px 24px rgba(37,99,235,.35);
+
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* =====================================================
+SCROLLBAR
+===================================================== */
 
-@media(max-width:992px){
+::-webkit-scrollbar{
 
-.header{
+    width:10px;
 
-    padding:28px;
 }
 
-.header h1{
+::-webkit-scrollbar-thumb{
 
-    font-size:34px;
+    background:#cbd5e1;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#94a3b8;
+
+}
+
+/* =====================================================
+RESPONSIVE
+===================================================== */
+
+@media(max-width:1000px){
+
+.hero{
+
+    flex-direction:column;
+
+    gap:25px;
+
+    text-align:center;
+
+}
+
+.hero-content{
+
+    flex-direction:column;
+
 }
 
 }
@@ -167,21 +315,29 @@ button:hover{
 .app{
 
     padding:20px;
+
 }
 
-.header{
+.hero{
 
-    padding:22px;
+    padding:25px;
+
 }
 
-.header h1{
+.hero h1{
+
+    font-size:30px;
+
+}
+
+.logo{
+
+    width:60px;
+
+    height:60px;
 
     font-size:28px;
-}
 
-.header p{
-
-    font-size:15px;
 }
 
 }
