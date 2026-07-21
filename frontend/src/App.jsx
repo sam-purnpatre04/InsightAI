@@ -23,16 +23,15 @@ function App() {
             📊
           </div>
 
-          <div>
+         <div className="hero-text">
 
-            <h1>InsightAI</h1>
+  <h1>InsightAI</h1>
 
-            <p>
-              AI Powered Business Intelligence Platform
-            </p>
+  <p>
+    AI Powered Business Intelligence Platform
+  </p>
 
-          </div>
-
+</div>
         </div>
 
         <div className="hero-right">

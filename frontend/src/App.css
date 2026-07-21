@@ -152,9 +152,20 @@ HEADER
 
     color:#1e293b;
 
-    margin-bottom:6px;
+    margin:0;
 
     font-weight:700;
+
+    line-height:1.1;
+
+}
+.hero p{
+
+    color:#64748b;
+
+    font-size:16px;
+
+    margin:0;
 
 }
 
@@ -307,6 +318,39 @@ RESPONSIVE
     flex-direction:column;
 
 }
+
+}
+.hero-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.logo{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    background:linear-gradient(135deg,#2563eb,#60a5fa);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:32px;
+
+    box-shadow:0 8px 18px rgba(37,99,235,.25);
 
 }
 
