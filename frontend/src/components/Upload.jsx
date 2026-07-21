@@ -18,6 +18,7 @@ function Upload({ setData }) {
       const result = await uploadDataset(file);
 
       setData(result);
+
     } catch (error) {
       console.error(error);
       alert("Upload failed.");
@@ -27,45 +28,87 @@ function Upload({ setData }) {
   };
 
   return (
-    <div className="upload-container">
-      <h2 className="upload-title">📂 Upload Your Dataset</h2>
+    <section className="upload-container">
 
-      <p className="upload-subtitle">
-        Upload a CSV dataset and let InsightAI generate
-        automatic reports, charts and business insights.
-      </p>
+      <div className="upload-header">
 
-      <div className="file-box">
-        <h3>Choose a CSV File</h3>
+        <h2>📂 Upload Dataset</h2>
 
-        <input
-          className="file-input"
-          type="file"
-          accept=".csv"
-          onChange={(e) => setFile(e.target.files[0])}
-        />
+        <p>
+          Upload any CSV dataset and let InsightAI automatically clean,
+          analyze, visualize and generate business insights.
+        </p>
 
-        {file && (
-          <p className="file-name">
-            📄 {file.name}
-          </p>
-        )}
       </div>
 
-      <button
-        className="upload-btn"
-        onClick={handleUpload}
-        disabled={loading}
-      >
-        {loading ? "Analyzing Dataset..." : "Analyze Dataset"}
-      </button>
+      <div className="upload-card">
 
-      {loading && (
-        <p className="loading">
-          ⏳ Please wait while AI analyzes your dataset...
-        </p>
-      )}
-    </div>
+        <label className="file-box">
+
+          <div className="upload-icon">
+            ☁️
+          </div>
+
+          <h3>Choose CSV File</h3>
+
+          <p>
+            Click here to browse your dataset
+          </p>
+
+          <input
+            type="file"
+            accept=".csv"
+            onChange={(e) => setFile(e.target.files[0])}
+            hidden
+          />
+
+        </label>
+
+        {file && (
+
+          <div className="selected-file">
+
+            <div>
+
+              <h4>{file.name}</h4>
+
+              <span>
+                {(file.size / 1024).toFixed(2)} KB
+              </span>
+
+            </div>
+
+            <div className="check">
+              ✓
+            </div>
+
+          </div>
+
+        )}
+
+        <button
+          className="upload-btn"
+          onClick={handleUpload}
+          disabled={loading}
+        >
+          {loading ? "Analyzing Dataset..." : "Analyze Dataset"}
+        </button>
+
+        {loading && (
+          <div className="loading">
+
+            <div className="loader"></div>
+
+            <span>
+              AI is processing your dataset...
+            </span>
+
+          </div>
+        )}
+
+      </div>
+
+    </section>
   );
 }
 
