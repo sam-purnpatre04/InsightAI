@@ -3,16 +3,19 @@ import { uploadDataset } from "../services/api";
 import "./Upload.css";
 
 function Upload({ setData }) {
+
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleUpload = async () => {
+
     if (!file) {
       alert("Please select a CSV file.");
       return;
     }
 
     try {
+
       setLoading(true);
 
       const result = await uploadDataset(file);
@@ -20,23 +23,34 @@ function Upload({ setData }) {
       setData(result);
 
     } catch (error) {
+
       console.error(error);
+
       alert("Upload failed.");
+
     } finally {
+
       setLoading(false);
+
     }
+
   };
 
   return (
+
     <section className="upload-container">
 
       <div className="upload-header">
 
-        <h2>📂 Upload Dataset</h2>
+        <span className="upload-badge">
+          DATA IMPORT
+        </span>
+
+        <h2>Upload Your Dataset</h2>
 
         <p>
-          Upload any CSV dataset and let InsightAI automatically clean,
-          analyze, visualize and generate business insights.
+          Upload any CSV dataset and InsightAI will automatically clean,
+          analyze, visualize and generate AI-powered business insights.
         </p>
 
       </div>
@@ -45,21 +59,21 @@ function Upload({ setData }) {
 
         <label className="file-box">
 
-          <div className="upload-icon">
-            ☁️
+          <div className="cloud-circle">
+              ☁️
           </div>
 
-          <h3>Choose CSV File</h3>
+          <h3>Drag & Drop your CSV here</h3>
 
           <p>
-            Click here to browse your dataset
+            or click to browse from your computer
           </p>
 
           <input
             type="file"
             accept=".csv"
-            onChange={(e) => setFile(e.target.files[0])}
             hidden
+            onChange={(e)=>setFile(e.target.files[0])}
           />
 
         </label>
@@ -68,18 +82,24 @@ function Upload({ setData }) {
 
           <div className="selected-file">
 
-            <div>
+            <div className="csv-icon">
+                📄
+            </div>
 
-              <h4>{file.name}</h4>
+            <div className="file-info">
 
-              <span>
-                {(file.size / 1024).toFixed(2)} KB
-              </span>
+                <h4>{file.name}</h4>
+
+                <span>
+                    CSV File • {(file.size/1024).toFixed(2)} KB
+                </span>
 
             </div>
 
-            <div className="check">
-              ✓
+            <div className="success-icon">
+
+                ✓
+
             </div>
 
           </div>
@@ -87,29 +107,39 @@ function Upload({ setData }) {
         )}
 
         <button
-          className="upload-btn"
-          onClick={handleUpload}
-          disabled={loading}
+
+            className="upload-btn"
+
+            disabled={loading}
+
+            onClick={handleUpload}
+
         >
-          {loading ? "Analyzing Dataset..." : "Analyze Dataset"}
+
+            {loading ? "Analyzing Dataset..." : "Analyze Dataset"}
+
         </button>
 
         {loading && (
-          <div className="loading">
 
-            <div className="loader"></div>
+            <div className="loading">
 
-            <span>
-              AI is processing your dataset...
-            </span>
+                <div className="loader"></div>
 
-          </div>
+                <span>
+                    AI is analyzing your dataset...
+                </span>
+
+            </div>
+
         )}
 
       </div>
 
     </section>
+
   );
+
 }
 
 export default Upload;
