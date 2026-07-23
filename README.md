@@ -21,7 +21,6 @@ The goal of InsightAI is to simplify business data analysis for non-technical us
 - Explainable AI using SHAP
 - AI-powered business insights
 - PostgreSQL database integration
-- Power BI dashboards
 - Report generation
 
 ---
