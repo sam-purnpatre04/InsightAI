@@ -1,69 +1,264 @@
+/* =====================================================
+CHARTS
+===================================================== */
+
 .charts-container{
-    margin-top:45px;
+
+    margin-top:70px;
+
 }
 
-.charts-title{
+/* =====================================================
+HEADER
+===================================================== */
+
+.charts-header{
+
     text-align:center;
-    font-size:30px;
-    margin-bottom:30px;
-    color:#1f2937;
+
+    margin-bottom:45px;
+
 }
+
+.section-badge{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    background:#e8f0ff;
+
+    color:#2563eb;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    letter-spacing:1px;
+
+    margin-bottom:18px;
+
+}
+
+.charts-header h2{
+
+    font-size:40px;
+
+    color:#111827;
+
+    margin-bottom:12px;
+
+}
+
+.charts-header p{
+
+    color:#64748b;
+
+    font-size:18px;
+
+    max-width:700px;
+
+    margin:auto;
+
+    line-height:1.7;
+
+}
+
+/* =====================================================
+GRID
+===================================================== */
 
 .charts-grid{
 
     display:grid;
 
-    grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
 
-    gap:25px;
+    gap:30px;
 
 }
+
+/* =====================================================
+CARD
+===================================================== */
 
 .chart-card{
 
     background:white;
 
-    border-radius:15px;
+    border-radius:22px;
 
-    padding:20px;
+    overflow:hidden;
 
-    box-shadow:0 8px 18px rgba(0,0,0,.08);
+    box-shadow:0 15px 35px rgba(15,23,42,.08);
 
-    transition:.3s;
+    transition:.35s;
 
 }
 
 .chart-card:hover{
 
-    transform:translateY(-6px);
+    transform:translateY(-8px);
 
-    box-shadow:0 15px 30px rgba(0,0,0,.12);
+    box-shadow:0 22px 45px rgba(15,23,42,.14);
+
+}
+
+/* =====================================================
+TOP
+===================================================== */
+
+.chart-top{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    padding:18px 20px 0;
 
 }
 
-.chart-card h3{
+.chart-type{
 
-    text-align:center;
+    background:#eef4ff;
 
-    margin-bottom:20px;
+    color:#2563eb;
 
-    color:#374151;
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
 
 }
+
+/* =====================================================
+IMAGE
+===================================================== */
 
 .chart-image{
 
     width:100%;
 
-    border-radius:10px;
+    height:300px;
+
+    object-fit:contain;
+
+    padding:20px;
+
+    transition:.35s;
 
 }
 
-@media(max-width:768px){
+.chart-card:hover .chart-image{
+
+    transform:scale(1.03);
+
+}
+
+/* =====================================================
+TITLE
+===================================================== */
+
+.chart-card h3{
+
+    text-align:center;
+
+    padding:0 20px;
+
+    font-size:21px;
+
+    color:#111827;
+
+    margin-bottom:20px;
+
+}
+
+/* =====================================================
+BUTTON
+===================================================== */
+
+.download-btn{
+
+    display:block;
+
+    width:85%;
+
+    margin:0 auto 28px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.download-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 20px rgba(37,99,235,.25);
+
+}
+
+/* =====================================================
+RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
 
 .charts-grid{
 
-grid-template-columns:1fr;
+    grid-template-columns:1fr;
+
+}
+
+.charts-header h2{
+
+    font-size:32px;
+
+}
+
+.chart-image{
+
+    height:250px;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.chart-card h3{
+
+    font-size:18px;
+
+}
+
+.chart-image{
+
+    height:220px;
+
+}
+
+.download-btn{
+
+    width:90%;
 
 }
 
