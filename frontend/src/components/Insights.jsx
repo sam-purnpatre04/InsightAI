@@ -10,14 +10,34 @@ function Insights({ insights }) {
         💡 Business Insights
       </h2>
 
+      <p className="insights-subtitle">
+        AI-generated insights extracted from your dataset.
+      </p>
+
       <div className="insights-grid">
 
         {insights.map((item, index) => (
-          <div className="insight-card" key={index}>
-            <span className="insight-icon">💡</span>
 
-            <p>{item}</p>
+          <div className="insight-card" key={index}>
+
+            <div className="insight-icon">
+              💡
+            </div>
+
+            <div className="insight-content">
+
+              <div className="insight-heading">
+                {item.title}
+              </div>
+
+              <p>
+                {item.description}
+              </p>
+
+            </div>
+
           </div>
+
         ))}
 
       </div>
