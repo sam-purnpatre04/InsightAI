@@ -107,18 +107,21 @@ def generate_dataset_summary(
 
 
 # =====================================================
+# =====================================================
 # MISSING VALUE INSIGHTS
 # =====================================================
 
-def generate_missing_value_insights(df, insights):
+def generate_missing_value_insights(
+    dataset_profile,
+    insights
+):
 
-    total_missing = df.isnull().sum()
+    missing = dataset_profile["missing_values"]
 
-    total_missing = total_missing[
-        total_missing > 0
-    ]
+    total_missing = sum(missing.values())
 
-    if len(total_missing) == 0:
+    # No missing values
+    if total_missing == 0:
 
         insights.append({
 
@@ -128,8 +131,40 @@ def generate_missing_value_insights(df, insights):
 
             "description":
                 "No missing values were detected."
+
         })
 
+        return
+
+    # Missing values found
+    for column, value in missing.items():
+
+        if value > 0:
+
+            percent = (
+                value / dataset_profile["rows"]
+            ) * 100
+
+            if percent >= 30:
+                level = "warning"
+
+            elif percent >= 10:
+                level = "info"
+
+            else:
+                level = "summary"
+
+            insights.append({
+
+                "type": level,
+
+                "title": f"Missing Values - {column}",
+
+                "description":
+                    f"{value:,} missing values "
+                    f"({percent:.1f}%) were detected before cleaning."
+
+            })
         return
 
     for column, value in total_missing.items():
@@ -456,7 +491,7 @@ def generate_insights(
 
     # Missing Values
     generate_missing_value_insights(
-        df,
+        dataset_profile,
         insights
     )
 
