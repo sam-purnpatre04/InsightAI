@@ -1,5 +1,441 @@
 import pandas as pd
+import numpy as np
 
+
+# =====================================================
+# COLUMN DETECTION
+# =====================================================
+
+def find_column(df, keywords):
+    """
+    Finds the first column whose name contains
+    one of the given keywords.
+    """
+
+    for column in df.columns:
+
+        name = column.lower()
+
+        for keyword in keywords:
+
+            if keyword in name:
+                return column
+
+    return None
+
+
+# =====================================================
+# DATA QUALITY SCORE
+# =====================================================
+
+def calculate_data_quality(df, cleaning_summary):
+
+    total_cells = df.shape[0] * df.shape[1]
+
+    missing = df.isnull().sum().sum()
+
+    duplicate_rows = cleaning_summary["duplicates_removed"]
+
+    missing_percent = (
+        missing / total_cells * 100
+        if total_cells > 0
+        else 0
+    )
+
+    duplicate_percent = (
+        duplicate_rows / len(df) * 100
+        if len(df) > 0
+        else 0
+    )
+
+    score = 100
+
+    score -= missing_percent * 0.6
+
+    score -= duplicate_percent * 0.4
+
+    score = max(0, min(100, round(score, 1)))
+
+    return score
+
+
+# =====================================================
+# DATASET SUMMARY
+# =====================================================
+
+def generate_dataset_summary(
+    df,
+    dataset_profile,
+    cleaning_summary,
+    insights
+):
+
+    rows = dataset_profile["rows"]
+
+    columns = dataset_profile["columns"]
+
+    memory = dataset_profile["memory_usage_kb"]
+
+    quality = calculate_data_quality(
+        df,
+        cleaning_summary
+    )
+
+    insights.append({
+        "type": "summary",
+        "title": "Dataset Overview",
+        "description":
+            f"The uploaded dataset contains {rows:,} rows "
+            f"and {columns} columns."
+    })
+
+    insights.append({
+        "type": "summary",
+        "title": "Memory Usage",
+        "description":
+            f"The dataset occupies approximately "
+            f"{memory:,.2f} KB in memory."
+    })
+
+    insights.append({
+        "type": "summary",
+        "title": "Data Quality Score",
+        "description":
+            f"Overall data quality score is "
+            f"{quality}/100."
+    })
+
+
+# =====================================================
+# MISSING VALUE INSIGHTS
+# =====================================================
+
+def generate_missing_value_insights(df, insights):
+
+    total_missing = df.isnull().sum()
+
+    total_missing = total_missing[
+        total_missing > 0
+    ]
+
+    if len(total_missing) == 0:
+
+        insights.append({
+
+            "type": "success",
+
+            "title": "Missing Values",
+
+            "description":
+                "No missing values were detected."
+        })
+
+        return
+
+    for column, value in total_missing.items():
+
+        percent = (
+            value / len(df)
+        ) * 100
+
+        if percent >= 30:
+
+            level = "warning"
+
+        elif percent >= 10:
+
+            level = "info"
+
+        else:
+
+            level = "summary"
+
+        insights.append({
+
+            "type": level,
+
+            "title": f"Missing Values - {column}",
+
+            "description":
+                f"{value:,} values "
+                f"({percent:.1f}%) are missing."
+        })
+
+
+# =====================================================
+# DUPLICATE INSIGHTS
+# =====================================================
+
+def generate_duplicate_insights(
+    cleaning_summary,
+    insights
+):
+
+    duplicates = cleaning_summary[
+        "duplicates_removed"
+    ]
+
+    if duplicates == 0:
+
+        insights.append({
+
+            "type": "success",
+
+            "title": "Duplicate Rows",
+
+            "description":
+                "No duplicate rows were found."
+        })
+
+    else:
+
+        insights.append({
+
+            "type": "warning",
+
+            "title": "Duplicate Rows",
+
+            "description":
+                f"{duplicates:,} duplicate rows "
+                f"were removed."
+        })
+# =====================================================
+# SALES INSIGHTS
+# =====================================================
+
+def generate_sales_insights(df, insights):
+
+    sales_column = find_column(
+        df,
+        ["sales", "revenue", "amount"]
+    )
+
+    if sales_column is None:
+        return
+
+    total_sales = df[sales_column].sum()
+
+    average_sales = df[sales_column].mean()
+
+    highest_sale = df[sales_column].max()
+
+    insights.append({
+
+        "type": "summary",
+
+        "title": "Total Sales",
+
+        "description":
+            f"Total sales amount is ₹{total_sales:,.2f}."
+
+    })
+
+    insights.append({
+
+        "type": "summary",
+
+        "title": "Average Sales",
+
+        "description":
+            f"Average transaction value is ₹{average_sales:,.2f}."
+
+    })
+
+    insights.append({
+
+        "type": "info",
+
+        "title": "Highest Sale",
+
+        "description":
+            f"The highest recorded sale is ₹{highest_sale:,.2f}."
+
+    })
+
+# =====================================================
+# PROFIT INSIGHTS
+# =====================================================
+
+def generate_profit_insights(df, insights):
+
+    profit_column = find_column(
+        df,
+        ["profit", "income"]
+    )
+
+    if profit_column is None:
+        return
+
+    total_profit = df[profit_column].sum()
+
+    avg_profit = df[profit_column].mean()
+
+    loss_rows = (df[profit_column] < 0).sum()
+
+    insights.append({
+
+        "type": "summary",
+
+        "title": "Total Profit",
+
+        "description":
+            f"Overall profit equals ₹{total_profit:,.2f}."
+
+    })
+
+    insights.append({
+
+        "type": "summary",
+
+        "title": "Average Profit",
+
+        "description":
+            f"Average profit per transaction is ₹{avg_profit:,.2f}."
+
+    })
+
+    if loss_rows > 0:
+
+        insights.append({
+
+            "type": "warning",
+
+            "title": "Loss Making Orders",
+
+            "description":
+                f"{loss_rows:,} transactions resulted in a loss."
+
+        })
+
+    else:
+
+        insights.append({
+
+            "type": "success",
+
+            "title": "Profitability",
+
+            "description":
+                "No loss-making transactions were found."
+
+        })
+# =====================================================
+# DISCOUNT INSIGHTS
+# =====================================================
+
+def generate_discount_insights(df, insights):
+
+    discount_column = find_column(
+        df,
+        ["discount"]
+    )
+
+    if discount_column is None:
+        return
+
+    average_discount = df[discount_column].mean()
+
+    maximum_discount = df[discount_column].max()
+
+    insights.append({
+
+        "type": "info",
+
+        "title": "Average Discount",
+
+        "description":
+            f"Average discount offered is {average_discount:.2f}."
+
+    })
+
+    insights.append({
+
+        "type": "info",
+
+        "title": "Maximum Discount",
+
+        "description":
+            f"Maximum recorded discount is {maximum_discount:.2f}."
+
+    })
+
+# =====================================================
+# CATEGORY INSIGHTS
+# =====================================================
+
+def generate_category_insights(df, insights):
+
+    category_column = find_column(
+        df,
+        ["category"]
+    )
+
+    sales_column = find_column(
+        df,
+        ["sales", "revenue", "amount"]
+    )
+
+    if category_column is None:
+        return
+
+    top_category = (
+        df[category_column]
+        .value_counts()
+        .idxmax()
+    )
+
+    insights.append({
+
+        "type": "summary",
+
+        "title": "Top Category",
+
+        "description":
+            f"'{top_category}' appears most frequently in the dataset."
+
+    })
+
+    if sales_column:
+
+        category_sales = (
+
+            df.groupby(category_column)[sales_column]
+
+            .sum()
+
+            .sort_values(ascending=False)
+
+        )
+
+        best = category_sales.index[0]
+
+        worst = category_sales.index[-1]
+
+        insights.append({
+
+            "type": "success",
+
+            "title": "Best Performing Category",
+
+            "description":
+                f"{best} generated the highest sales."
+
+        })
+
+        insights.append({
+
+            "type": "warning",
+
+            "title": "Lowest Performing Category",
+
+            "description":
+                f"{worst} generated the lowest sales."
+
+        })
+
+# =====================================================
+# MAIN FUNCTION
+# =====================================================
 
 def generate_insights(
     df: pd.DataFrame,
@@ -7,114 +443,51 @@ def generate_insights(
     cleaning_summary: dict,
     eda: dict
 ):
-    """
-    Generate business-friendly insights from
-    the dataset profile, cleaning summary,
-    and EDA results.
-    """
 
     insights = []
 
-    # -----------------------------
-    # Dataset Overview
-    # -----------------------------
-    insights.append(
-        f"The dataset contains {dataset_profile['rows']} rows and {dataset_profile['columns']} columns."
+    # Dataset Summary
+    generate_dataset_summary(
+        df,
+        dataset_profile,
+        cleaning_summary,
+        insights
     )
 
-    # -----------------------------
     # Missing Values
-    # -----------------------------
-    total_missing = sum(
-        dataset_profile["missing_values"].values()
+    generate_missing_value_insights(
+        df,
+        insights
     )
 
-    if total_missing == 0:
-        insights.append(
-            "No missing values were found in the uploaded dataset."
-        )
-    else:
-        insights.append(
-            f"The dataset contained {total_missing} missing values before cleaning."
-        )
-
-    # -----------------------------
     # Duplicate Rows
-    # -----------------------------
-    duplicates = cleaning_summary["duplicates_removed"]
+    generate_duplicate_insights(
+        cleaning_summary,
+        insights
+    )
 
-    if duplicates == 0:
-        insights.append(
-            "No duplicate rows were detected."
-        )
-    else:
-        insights.append(
-            f"{duplicates} duplicate rows were removed."
-        )
+    # Sales Analysis
+    generate_sales_insights(
+        df,
+        insights
+    )
 
-    # -----------------------------
-    # Numerical Insights
-    # -----------------------------
-    numerical_summary = eda["numerical_summary"]
+    # Profit Analysis
+    generate_profit_insights(
+        df,
+        insights
+    )
 
-    for column, stats in numerical_summary.items():
+    # Discount Analysis
+    generate_discount_insights(
+        df,
+        insights
+    )
 
-        insights.append(
-            f"The average {column} is {stats['mean']}."
-        )
-
-        insights.append(
-            f"{column} ranges from {stats['min']} to {stats['max']}."
-        )
-
-    # -----------------------------
-    # Categorical Insights
-    # -----------------------------
-    categorical_summary = eda["categorical_summary"]
-
-    for column, stats in categorical_summary.items():
-
-        insights.append(
-            f"{column} contains {stats['unique_values']} unique values."
-        )
-
-        insights.append(
-            f"The most common {column} is '{stats['most_frequent']}'."
-        )
-
-    # -----------------------------
-    # Correlation Insights
-    # -----------------------------
-    correlation_matrix = eda["correlation_matrix"]
-
-    checked = set()
-
-    for col1 in correlation_matrix:
-
-        for col2 in correlation_matrix[col1]:
-
-            if col1 == col2:
-                continue
-
-            pair = tuple(sorted((col1, col2)))
-
-            if pair in checked:
-                continue
-
-            checked.add(pair)
-
-            value = correlation_matrix[col1][col2]
-
-            if abs(value) >= 0.70:
-
-                insights.append(
-                    f"There is a strong correlation ({value}) between {col1} and {col2}."
-                )
-
-            elif abs(value) >= 0.50:
-
-                insights.append(
-                    f"There is a moderate correlation ({value}) between {col1} and {col2}."
-                )
+    # Category Analysis
+    generate_category_insights(
+        df,
+        insights
+    )
 
     return insights
