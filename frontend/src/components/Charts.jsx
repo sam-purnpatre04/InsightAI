@@ -1,6 +1,9 @@
+import { useState } from "react";
 import "./Charts.css";
 
 function Charts({ charts }) {
+
+  const [selectedChart, setSelectedChart] = useState(null);
 
   if (!charts || charts.length === 0) return null;
 
@@ -16,7 +19,6 @@ function Charts({ charts }) {
     if (chart.includes("bar")) return "Bar Chart";
 
     return "Chart";
-
   };
 
   return (
@@ -29,13 +31,11 @@ function Charts({ charts }) {
           DATA VISUALIZATION
         </span>
 
-        <h2>
-          AI Generated Charts
-        </h2>
+        <h2>AI Generated Charts</h2>
 
         <p>
-          InsightAI automatically creates professional visualizations
-          to help understand your dataset faster.
+          InsightAI automatically creates professional
+          visualizations to help understand your dataset faster.
         </p>
 
       </div>
@@ -49,9 +49,7 @@ function Charts({ charts }) {
             <div className="chart-top">
 
               <span className="chart-type">
-
                 {getChartType(chart)}
-
               </span>
 
             </div>
@@ -65,26 +63,55 @@ function Charts({ charts }) {
             <h3>
 
               {chart
-                .replace(".png","")
-                .replaceAll("_"," ")
-                .replace(/\b\w/g,c=>c.toUpperCase())}
+                .replace(".png", "")
+                .replaceAll("_", " ")
+                .replace(/\b\w/g, c => c.toUpperCase())}
 
             </h3>
 
-            <a
-              href={`http://127.0.0.1:8000/reports/${chart}`}
-              target="_blank"
-              rel="noreferrer"
+            <button
               className="download-btn"
+              onClick={() => setSelectedChart(chart)}
             >
               View Full Size
-            </a>
+            </button>
 
           </div>
 
         ))}
 
       </div>
+
+      {selectedChart && (
+
+        <div
+          className="image-modal"
+          onClick={() => setSelectedChart(null)}
+        >
+
+          <div
+            className="image-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+
+            <button
+              className="close-btn"
+              onClick={() => setSelectedChart(null)}
+            >
+              ✕
+            </button>
+
+            <img
+              src={`http://127.0.0.1:8000/reports/${selectedChart}`}
+              alt={selectedChart}
+              className="modal-image"
+            />
+
+          </div>
+
+        </div>
+
+      )}
 
     </section>
 
