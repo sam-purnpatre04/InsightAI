@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Charts.css";
+import ImageModal from "./ImageModal";
 
 function Charts({ charts }) {
 
@@ -13,12 +14,21 @@ function Charts({ charts }) {
     if (chart.includes("boxplot")) return "Box Plot";
     if (chart.includes("scatter")) return "Scatter Plot";
     if (chart.includes("heatmap")) return "Heatmap";
-    if (chart.includes("line")) return "Line Chart";
     if (chart.includes("trend")) return "Trend";
+    if (chart.includes("line")) return "Line Chart";
     if (chart.includes("pie")) return "Pie Chart";
     if (chart.includes("bar")) return "Bar Chart";
 
     return "Chart";
+  };
+
+  const formatTitle = (chart) => {
+
+    return chart
+      .replace(".png", "")
+      .replaceAll("_", " ")
+      .replace(/\b\w/g, c => c.toUpperCase());
+
   };
 
   return (
@@ -44,7 +54,10 @@ function Charts({ charts }) {
 
         {charts.map((chart, index) => (
 
-          <div className="chart-card" key={index}>
+          <div
+            className="chart-card"
+            key={index}
+          >
 
             <div className="chart-top">
 
@@ -61,19 +74,14 @@ function Charts({ charts }) {
             />
 
             <h3>
-
-              {chart
-                .replace(".png", "")
-                .replaceAll("_", " ")
-                .replace(/\b\w/g, c => c.toUpperCase())}
-
+              {formatTitle(chart)}
             </h3>
 
             <button
               className="download-btn"
               onClick={() => setSelectedChart(chart)}
             >
-              View Full Size
+              🔍 View Full Size
             </button>
 
           </div>
@@ -82,36 +90,23 @@ function Charts({ charts }) {
 
       </div>
 
-      {selectedChart && (
+      <ImageModal
 
-        <div
-          className="image-modal"
-          onClick={() => setSelectedChart(null)}
-        >
+        image={
+          selectedChart
+            ? `http://127.0.0.1:8000/reports/${selectedChart}`
+            : null
+        }
 
-          <div
-            className="image-modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
+        title={
+          selectedChart
+            ? formatTitle(selectedChart)
+            : ""
+        }
 
-            <button
-              className="close-btn"
-              onClick={() => setSelectedChart(null)}
-            >
-              ✕
-            </button>
+        onClose={() => setSelectedChart(null)}
 
-            <img
-              src={`http://127.0.0.1:8000/reports/${selectedChart}`}
-              alt={selectedChart}
-              className="modal-image"
-            />
-
-          </div>
-
-        </div>
-
-      )}
+      />
 
     </section>
 
