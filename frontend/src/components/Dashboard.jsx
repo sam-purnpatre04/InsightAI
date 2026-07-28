@@ -4,7 +4,7 @@ import SummaryCards from "./SummaryCards";
 import Insights from "./Insights";
 import Charts from "./Charts";
 import Report from "./Report";
-
+import Outliers from "./Outliers";
 function Dashboard({ data }) {
   if (!data) return null;
 
@@ -51,6 +51,13 @@ function Dashboard({ data }) {
       </section>
 
       <section className="section">
+      <section className="section">
+
+  <Outliers
+    outliers={data.eda?.outlier_summary}
+  />
+
+</section>
 
         <h2>📊 Data Visualizations</h2>
 
