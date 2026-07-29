@@ -5,22 +5,27 @@ import Insights from "./Insights";
 import Charts from "./Charts";
 import Report from "./Report";
 import Outliers from "./Outliers";
+
 function Dashboard({ data }) {
+
   if (!data) return null;
 
   return (
+
     <div className="dashboard-container">
 
       <div className="dashboard-header">
 
         <div>
+
           <h1 className="dashboard-title">
-            📊 InsightAI Dashboard
+             InsightAI Dashboard
           </h1>
 
           <p className="dashboard-subtitle">
             AI Powered Business Intelligence & Data Analytics
           </p>
+
         </div>
 
         <div className="dashboard-badge">
@@ -29,9 +34,12 @@ function Dashboard({ data }) {
 
       </div>
 
+
+      
+
       <section className="section">
 
-        <h2>📈 Dataset Summary</h2>
+        <h2> Dataset Summary</h2>
 
         <SummaryCards
           profile={data.dataset_profile}
@@ -40,9 +48,11 @@ function Dashboard({ data }) {
 
       </section>
 
+
+
       <section className="section">
 
-        <h2>💡 Business Insights</h2>
+        <h2> Business Insights</h2>
 
         <Insights
           insights={data.business_insights}
@@ -50,16 +60,21 @@ function Dashboard({ data }) {
 
       </section>
 
+
+      
       <section className="section">
+
+        <Outliers
+          outliers={data.eda?.outlier_summary}
+        />
+
+      </section>
+
+
+      
       <section className="section">
 
-  <Outliers
-    outliers={data.eda?.outlier_summary}
-  />
-
-</section>
-
-        <h2>📊 Data Visualizations</h2>
+        <h2> Data Visualizations</h2>
 
         <Charts
           charts={data.generated_charts}
@@ -67,9 +82,12 @@ function Dashboard({ data }) {
 
       </section>
 
+
+      
+
       <section className="section">
 
-        <h2>📄 Executive Report</h2>
+        <h2> Executive Report</h2>
 
         <Report
           report={data.report}
@@ -78,6 +96,7 @@ function Dashboard({ data }) {
       </section>
 
     </div>
+
   );
 }
 
