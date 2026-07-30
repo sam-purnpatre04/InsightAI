@@ -1,13 +1,20 @@
+/* =====================================================
+   UPLOAD SECTION
+===================================================== */
+
 .upload-container {
     width: 100%;
-    margin: 28px 0;
+    margin: 25px 0 35px;
 }
 
 
+/* =====================================================
+   HEADER
+===================================================== */
 
 .upload-header {
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
 }
 
 .upload-badge {
@@ -25,17 +32,17 @@
 
     letter-spacing: 1px;
 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .upload-header h2 {
-    font-size: 34px;
+    font-size: 32px;
 
     color: #111827;
 
     font-weight: 700;
 
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .upload-header p {
@@ -45,17 +52,19 @@
 
     color: #64748b;
 
-    font-size: 16px;
+    font-size: 15px;
 
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 
+/* =====================================================
+   MAIN UPLOAD CARD
+===================================================== */
 
 .upload-card {
     width: 100%;
-
-    max-width: 760px;
+    max-width: 1100px;
 
     margin: auto;
 
@@ -63,22 +72,35 @@
 
     border-radius: 20px;
 
-    padding: 28px;
+    padding: 24px;
 
     box-shadow:
-        0 12px 32px rgba(15, 23, 42, 0.07);
+        0 10px 30px rgba(15, 23, 42, 0.07);
+
+    display: grid;
+
+    grid-template-columns: 1.2fr 0.8fr;
+
+    gap: 24px;
+
+    align-items: stretch;
 }
 
 
+/* =====================================================
+   UPLOAD BOX
+===================================================== */
 
 .file-box {
+    min-height: 250px;
+
     border: 2px dashed #3b82f6;
 
     border-radius: 17px;
 
     background: #f8fbff;
 
-    padding: 34px 25px;
+    padding: 30px 20px;
 
     cursor: pointer;
 
@@ -87,6 +109,10 @@
     flex-direction: column;
 
     align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
 
     transition: 0.3s;
 }
@@ -100,11 +126,13 @@
 }
 
 
-
+/* =====================================================
+   CLOUD
+===================================================== */
 
 .cloud-circle {
-    width: 72px;
-    height: 72px;
+    width: 65px;
+    height: 65px;
 
     border-radius: 50%;
 
@@ -119,16 +147,16 @@
     justify-content: center;
     align-items: center;
 
-    font-size: 34px;
+    font-size: 30px;
 
     color: white;
 
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 
     animation: floatCloud 3s ease-in-out infinite;
 
     box-shadow:
-        0 10px 24px rgba(37, 99, 235, 0.22);
+        0 8px 20px rgba(37, 99, 235, 0.20);
 }
 
 @keyframes floatCloud {
@@ -148,33 +176,46 @@
 }
 
 
-
+/* =====================================================
+   UPLOAD TEXT
+===================================================== */
 
 .file-box h3 {
-    font-size: 23px;
+    font-size: 21px;
 
     color: #0f172a;
 
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 .file-box p {
     color: #64748b;
 
-    font-size: 15px;
+    font-size: 14px;
 }
 
 
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
 
+.upload-card::after {
+    content: "";
+}
+
+
+/* =====================================================
+   SELECTED FILE
+===================================================== */
 
 .selected-file {
-    margin-top: 20px;
+    margin-top: 0;
 
-    padding: 15px 18px;
+    padding: 15px 16px;
 
     background: #f8fbff;
 
-    border-radius: 15px;
+    border-radius: 14px;
 
     display: flex;
 
@@ -192,10 +233,10 @@
 }
 
 .csv-icon {
-    width: 48px;
-    height: 48px;
+    width: 45px;
+    height: 45px;
 
-    border-radius: 12px;
+    border-radius: 11px;
 
     background: #e8f0ff;
 
@@ -205,7 +246,7 @@
 
     justify-content: center;
 
-    font-size: 23px;
+    font-size: 21px;
 
     flex-shrink: 0;
 }
@@ -213,26 +254,34 @@
 .file-info {
     flex: 1;
 
-    margin-left: 15px;
+    margin-left: 12px;
+
+    min-width: 0;
 }
 
 .file-info h4 {
     color: #111827;
 
-    font-size: 16px;
+    font-size: 15px;
 
     margin-bottom: 3px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
 }
 
 .file-info span {
     color: #64748b;
 
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .success-icon {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
 
     border-radius: 50%;
 
@@ -246,7 +295,7 @@
 
     justify-content: center;
 
-    font-size: 18px;
+    font-size: 16px;
 
     font-weight: bold;
 
@@ -254,18 +303,20 @@
 }
 
 
-
+/* =====================================================
+   ANALYZE BUTTON
+===================================================== */
 
 .upload-btn {
     width: 100%;
 
-    margin-top: 22px;
+    margin-top: 16px;
 
-    padding: 14px;
+    padding: 13px;
 
     border: none;
 
-    border-radius: 12px;
+    border-radius: 11px;
 
     background: linear-gradient(
         135deg,
@@ -275,7 +326,7 @@
 
     color: white;
 
-    font-size: 16px;
+    font-size: 15px;
 
     font-weight: 600;
 
@@ -298,10 +349,12 @@
 }
 
 
-
+/* =====================================================
+   LOADING
+===================================================== */
 
 .loading {
-    margin-top: 18px;
+    margin-top: 14px;
 
     display: flex;
 
@@ -309,18 +362,18 @@
 
     justify-content: center;
 
-    gap: 12px;
+    gap: 10px;
 
     color: #2563eb;
 
     font-weight: 600;
 
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .loader {
-    width: 21px;
-    height: 21px;
+    width: 20px;
+    height: 20px;
 
     border: 3px solid #dbeafe;
 
@@ -344,36 +397,87 @@
 }
 
 
+/* =====================================================
+   DESKTOP RIGHT SIDE LAYOUT
+===================================================== */
 
+/*
+   Since Upload.jsx puts the file box first and
+   selected-file/button/loading after it, we use
+   CSS grid positioning to create the dashboard look.
+*/
+
+.upload-card > .file-box {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+}
+
+.upload-card > .selected-file {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.upload-card > .upload-btn {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+}
+
+.upload-card > .loading {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: start;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
 
 @media (max-width: 900px) {
 
     .upload-card {
-        padding: 24px;
+        grid-template-columns: 1fr;
+
+        max-width: 760px;
+
+        padding: 22px;
+    }
+
+    .upload-card > .file-box {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .upload-card > .selected-file {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .upload-card > .upload-btn {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .upload-card > .loading {
+        grid-column: 1;
+        grid-row: 4;
     }
 
     .file-box {
-        padding: 30px 20px;
-    }
-
-    .file-box h3 {
-        font-size: 21px;
-    }
-
-    .upload-header h2 {
-        font-size: 30px;
+        min-height: 220px;
     }
 }
 
 
+/* =====================================================
+   MOBILE
+===================================================== */
+
 @media (max-width: 600px) {
 
     .upload-container {
-        margin: 22px 0;
-    }
-
-    .upload-header {
-        margin-bottom: 20px;
+        margin: 20px 0 28px;
     }
 
     .upload-header h2 {
@@ -385,33 +489,33 @@
     }
 
     .upload-card {
-        padding: 18px;
+        padding: 16px;
+        border-radius: 17px;
     }
 
-    .selected-file {
-        flex-direction: column;
+    .file-box {
+        min-height: 190px;
 
-        gap: 12px;
-
-        text-align: center;
-    }
-
-    .file-info {
-        margin-left: 0;
+        padding: 25px 15px;
     }
 
     .cloud-circle {
-        width: 65px;
-        height: 65px;
+        width: 58px;
+        height: 58px;
 
-        font-size: 30px;
+        font-size: 27px;
     }
 
     .file-box h3 {
-        font-size: 20px;
+        font-size: 19px;
     }
 
     .file-box p {
-        font-size: 14px;
+        font-size: 13px;
     }
+
+    .selected-file {
+        padding: 13px;
+    }
+
 }
