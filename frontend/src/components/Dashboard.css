@@ -1,111 +1,237 @@
-.dashboard-container{
+/* =====================================================
+   DASHBOARD NAVIGATION
+===================================================== */
 
-    width:min(1400px,92%);
-    margin:auto;
-    padding:40px 0 70px;
+.dashboard-nav {
 
-}
+    display: flex;
 
-.dashboard-header{
+    align-items: center;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:40px;
-    flex-wrap:wrap;
-    gap:20px;
+    gap: 10px;
 
-}
+    background: white;
 
-.dashboard-title{
+    padding: 10px;
 
-    font-size:42px;
-    font-weight:700;
-    color:#1e293b;
-    margin:0;
+    border-radius: 16px;
+
+    margin-bottom: 30px;
+
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+
+    overflow-x: auto;
 
 }
 
-.dashboard-subtitle{
 
-    margin-top:8px;
-    color:#64748b;
-    font-size:17px;
+/* =====================================================
+   NAVIGATION BUTTON
+===================================================== */
+
+.nav-btn {
+
+    background: transparent;
+
+    color: #64748b;
+
+    border: none;
+
+    box-shadow: none;
+
+    padding: 12px 20px;
+
+    border-radius: 11px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition: 0.25s;
 
 }
 
-.dashboard-badge{
+.nav-btn:hover {
 
-    background:#2563eb;
-    color:white;
-    padding:12px 24px;
-    border-radius:40px;
-    font-weight:600;
-    box-shadow:0 10px 25px rgba(37,99,235,.25);
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    transform: none;
+
+    box-shadow: none;
 
 }
 
-.section{
 
-    background:#ffffff;
+/* =====================================================
+   ACTIVE TAB
+===================================================== */
 
-    border-radius:18px;
+.nav-btn.active {
 
-    padding:30px;
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
 
-    margin-top:35px;
+    color: white;
 
     box-shadow:
-    0 12px 30px rgba(0,0,0,.08);
-
-    transition:.3s;
+        0 6px 15px rgba(37, 99, 235, 0.25);
 
 }
 
-.section:hover{
 
-    transform:translateY(-4px);
+/* =====================================================
+   DASHBOARD CONTENT
+===================================================== */
 
-    box-shadow:
-    0 18px 40px rgba(0,0,0,.12);
+.dashboard-content {
 
-}
-
-.section h2{
-
-    color:#2563eb;
-
-    margin-bottom:25px;
-
-    font-size:28px;
-
-    font-weight:700;
-
-    border-bottom:2px solid #eef2ff;
-
-    padding-bottom:12px;
+    animation: dashboardFade 0.25s ease;
 
 }
 
-@media(max-width:900px){
+@keyframes dashboardFade {
 
-.dashboard-header{
+    from {
 
-    flex-direction:column;
-    align-items:flex-start;
+        opacity: 0;
+
+        transform: translateY(5px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
 
 }
 
-.dashboard-title{
 
-    font-size:34px;
+/* =====================================================
+   DASHBOARD SECTION
+===================================================== */
+
+.dashboard-section {
+
+    background: transparent;
+
+    margin-bottom: 35px;
 
 }
 
-.section{
 
-    padding:22px;
+/* =====================================================
+   SECTION HEADING
+===================================================== */
+
+.section-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
 
 }
+
+.section-heading h2 {
+
+    margin: 5px 0 0;
+
+    font-size: 26px;
+
+    color: #1e293b;
+
+}
+
+.section-label {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+    color: #2563eb;
+
+}
+
+
+/* =====================================================
+   VIEW ALL BUTTON
+===================================================== */
+
+.view-section-btn {
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    border: none;
+
+    box-shadow: none;
+
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+.view-section-btn:hover {
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+    transform: none;
+
+    box-shadow: none;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .dashboard-nav {
+
+        gap: 5px;
+
+        padding: 7px;
+
+    }
+
+    .nav-btn {
+
+        padding: 10px 14px;
+
+        font-size: 13px;
+
+    }
+
+    .section-heading h2 {
+
+        font-size: 22px;
+
+    }
 
 }
