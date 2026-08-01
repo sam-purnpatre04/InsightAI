@@ -287,6 +287,7 @@ function Dashboard({ data }) {
 
             <Report
               report={data.report}
+               data={data}
             />
 
           </section>
