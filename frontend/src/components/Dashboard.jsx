@@ -17,10 +17,6 @@ function Dashboard({ data }) {
 
     <div className="dashboard-container">
 
-      {/* =====================================================
-          DASHBOARD HEADER
-      ===================================================== */}
-
       <div className="dashboard-header">
 
         <div>
@@ -43,9 +39,6 @@ function Dashboard({ data }) {
       </div>
 
 
-      {/* =====================================================
-          DASHBOARD NAVIGATION
-      ===================================================== */}
 
       <div className="dashboard-nav">
 
@@ -87,10 +80,6 @@ function Dashboard({ data }) {
       </div>
 
 
-      {/* =====================================================
-          OVERVIEW
-      ===================================================== */}
-
       {activeTab === "overview" && (
 
         <div className="dashboard-content">
@@ -119,7 +108,7 @@ function Dashboard({ data }) {
           </section>
 
 
-          {/* Quick insights preview */}
+          
 
           <section className="dashboard-section">
 
@@ -155,9 +144,6 @@ function Dashboard({ data }) {
       )}
 
 
-      {/* =====================================================
-          INSIGHTS
-      ===================================================== */}
 
       {activeTab === "insights" && (
 
@@ -190,9 +176,7 @@ function Dashboard({ data }) {
       )}
 
 
-      {/* =====================================================
-          OUTLIERS
-      ===================================================== */}
+      
 
       {activeTab === "outliers" && (
 
@@ -225,10 +209,6 @@ function Dashboard({ data }) {
       )}
 
 
-      {/* =====================================================
-          VISUALIZATIONS
-      ===================================================== */}
-
       {activeTab === "visualizations" && (
 
         <div className="dashboard-content">
@@ -260,9 +240,7 @@ function Dashboard({ data }) {
       )}
 
 
-      {/* =====================================================
-          REPORT
-      ===================================================== */}
+     
 
       {activeTab === "report" && (
 
