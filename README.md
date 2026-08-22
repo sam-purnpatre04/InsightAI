@@ -49,15 +49,7 @@ The goal of InsightAI is to simplify business data analysis for non-technical us
 - Plotly
 - Matplotlib
 
-### Business Intelligence
-- Power BI
-
 ### Version Control
 - Git & GitHub
 
----
-
-## Project Status
-
-🚧 Currently under development.
 
