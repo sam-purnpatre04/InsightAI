@@ -7,7 +7,7 @@ InsightAI is an AI-powered Business Intelligence platform designed to help retai
 
 ## Project Objective
 
-The goal of InsightAI is to simplify business data analysis for non-technical users by providing an end-to-end analytics platform. Users can upload datasets, explore trends, generate predictions, and receive AI-generated business insights without requiring advanced data science knowledge.
+The goal of InsightAI is to simplify business data analysis for non-technical users by providing an end-to-end analytics platform. Users can upload datasets, explore trends, generate predictions and receive AI-generated business insights without requiring advanced data science knowledge.
 
 ---
 
