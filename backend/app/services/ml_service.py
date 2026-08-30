@@ -25,9 +25,7 @@ from sklearn.metrics import (
 )
 
 
-# ======================================================
-# TARGET DETECTION
-# ======================================================
+
 
 def detect_target_column(df: pd.DataFrame):
 
@@ -55,9 +53,7 @@ def detect_target_column(df: pd.DataFrame):
         "revenue"
     ]
 
-    # ------------------------------------------
-    # Search by column name
-    # ------------------------------------------
+   
 
     for column in df.columns:
 
@@ -70,10 +66,7 @@ def detect_target_column(df: pd.DataFrame):
                 return column
 
 
-    # ------------------------------------------
-    # Search for low-cardinality columns
-    # ------------------------------------------
-
+   
     categorical_columns = df.select_dtypes(
         include=["object", "category", "bool"]
     ).columns
@@ -90,9 +83,6 @@ def detect_target_column(df: pd.DataFrame):
     return None
 
 
-# ======================================================
-# DETECT PROBLEM TYPE
-# ======================================================
 
 def detect_problem_type(df: pd.DataFrame, target_column):
 
@@ -103,7 +93,7 @@ def detect_problem_type(df: pd.DataFrame, target_column):
 
     target = df[target_column]
 
-    # Categorical target
+    
     if (
         target.dtype == "object"
         or str(target.dtype) == "category"
@@ -113,7 +103,7 @@ def detect_problem_type(df: pd.DataFrame, target_column):
         return "classification"
 
 
-    # Numeric target with small number of unique values
+    
     if target.nunique() <= 10:
 
         return "classification"
@@ -122,9 +112,6 @@ def detect_problem_type(df: pd.DataFrame, target_column):
     return "regression"
 
 
-# ======================================================
-# BUILD PREPROCESSOR
-# ======================================================
 
 def build_preprocessor(X):
 
@@ -187,9 +174,7 @@ def build_preprocessor(X):
     return preprocessor
 
 
-# ======================================================
-# CLASSIFICATION
-# ======================================================
+
 
 def run_classification(df, target_column):
 
