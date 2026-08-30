@@ -1,13 +1,13 @@
 # InsightAI
 
-InsightAI is an AI-powered Business Intelligence platform designed to help retail and e-commerce businesses transform raw data into actionable insights. The platform automates data cleaning, exploratory data analysis (EDA), machine learning, explainable AI, and interactive business reporting in a single application.This application will help user to get insight and be able to take bsiness decisionn inn short amount of time.
+InsightAI is an AI-powered Business Intelligence platform designed to help retail and e-commerce businesses transform raw data into actionable insights. The platform automates data cleaning, exploratory data analysis (EDA), machine learning, explainable AI, and interactive business reporting in a single application.This application will help user to get insight and be able to take business decision in short amount of time.
 
 
 ---
 
 ## Project Objective
 
-The goal of InsightAI is to simplify business data analysis for non-technical users by providing an end-to-end analytics platform. Users can upload datasets, explore trends, generate predictions, and receive AI-generated business insights without requiring advanced data science knowledge.
+The goal of InsightAI is to simplify business data analysis for non-technical users by providing an end-to-end analytics platform. Users can upload datasets, explore trends, generate predictions and receive AI-generated business insights without requiring advanced data science knowledge.
 
 ---
 
@@ -49,15 +49,7 @@ The goal of InsightAI is to simplify business data analysis for non-technical us
 - Plotly
 - Matplotlib
 
-### Business Intelligence
-- Power BI
-
 ### Version Control
 - Git & GitHub
 
----
-
-## Project Status
-
-🚧 Currently under development.
 
