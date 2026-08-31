@@ -43,9 +43,6 @@ def save_chart(filename):
     return filename
 
 
-# ======================================================
-# COLUMN HELPERS
-# ======================================================
 
 def get_numeric_columns(df):
 
@@ -59,9 +56,7 @@ def get_categorical_columns(df):
     ).columns.tolist()
 
 
-# ======================================================
-# DATE DETECTION
-# ======================================================
+
 
 def detect_datetime_column(df):
 
@@ -87,9 +82,6 @@ def detect_datetime_column(df):
 
     return None
 
-# ======================================================
-# HISTOGRAM
-# ======================================================
 
 def histogram(df, column):
 
@@ -112,9 +104,7 @@ def histogram(df, column):
     )
 
 
-# ======================================================
-# BOXPLOT
-# ======================================================
+
 
 def boxplot(df, column):
 
@@ -132,9 +122,6 @@ def boxplot(df, column):
     )
 
 
-# ======================================================
-# MISSING VALUES CHART
-# ======================================================
 
 def missing_values_chart(df):
 
@@ -163,9 +150,6 @@ def missing_values_chart(df):
         "missing_values.png"
     )
 
-# ======================================================
-# SCATTER PLOT
-# ======================================================
 
 def scatter_plot(df, numeric_columns):
 
