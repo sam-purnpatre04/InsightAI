@@ -1,6 +1,6 @@
 # InsightAI
 
-InsightAI is an AI-powered Business Intelligence platform designed to help retail and e-commerce businesses transform raw data into actionable insights. The platform automates data cleaning, exploratory data analysis (EDA), machine learning, explainable AI, and interactive business reporting in a single application.
+InsightAI is an AI-powered Business Intelligence platform designed to help retail and e-commerce businesses transform raw data into actionable insights. The platform automates data cleaning, exploratory data analysis (EDA), machine learning, explainable AI and interactive business reporting in a single application.
 
 ---
 
