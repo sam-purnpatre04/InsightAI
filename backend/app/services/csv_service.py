@@ -6,13 +6,15 @@ from backend.app.services.eda_service import generate_eda
 from backend.app.services.insights_service import generate_insights
 from backend.app.services.visualization_service import generate_visualizations
 from backend.app.services.report_service import generate_report
+from backend.app.services.ml_service import generate_ml_analysis
 
 
 def read_csv(upload_file):
     """
     Reads uploaded CSV files with automatic encoding detection,
     performs profiling, cleaning, EDA, visualization,
-    business insight generation and report generation.
+    machine learning analysis, business insight generation
+    and report generation.
     """
 
     # -----------------------------
@@ -28,13 +30,11 @@ def read_csv(upload_file):
     ]
 
     df = None
-
     last_error = None
 
     for encoding in encodings:
 
         try:
-
             upload_file.file.seek(0)
 
             df = pd.read_csv(
@@ -48,15 +48,12 @@ def read_csv(upload_file):
             break
 
         except UnicodeDecodeError as e:
-
             last_error = e
 
         except Exception as e:
-
             last_error = e
 
     if df is None:
-
         raise Exception(
             f"Unable to read uploaded CSV.\n{last_error}"
         )
@@ -74,7 +71,7 @@ def read_csv(upload_file):
     cleaned_df, cleaning_summary = clean_dataset(df)
 
     # -----------------------------
-    # EDA
+    # Exploratory Data Analysis
     # -----------------------------
 
     eda = generate_eda(cleaned_df)
@@ -86,7 +83,13 @@ def read_csv(upload_file):
     charts = generate_visualizations(cleaned_df)
 
     # -----------------------------
-    # AI Insights
+    # Machine Learning Analysis
+    # -----------------------------
+
+    ml_analysis = generate_ml_analysis(cleaned_df)
+
+    # -----------------------------
+    # AI / Business Insights
     # -----------------------------
 
     insights = generate_insights(
@@ -113,7 +116,6 @@ def read_csv(upload_file):
     # -----------------------------
 
     return {
-
         "filename": upload_file.filename,
 
         "dataset_profile": dataset_profile,
@@ -122,10 +124,11 @@ def read_csv(upload_file):
 
         "eda": eda,
 
+        "ml_analysis": ml_analysis,
+
         "business_insights": insights,
 
         "generated_charts": charts,
 
         "report": report
-
     }
