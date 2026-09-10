@@ -455,9 +455,7 @@ def run_regression(df, target_column):
     }
 
 
-# ======================================================
-# MAIN ML FUNCTION
-# ======================================================
+
 
 def generate_ml_analysis(df: pd.DataFrame):
 

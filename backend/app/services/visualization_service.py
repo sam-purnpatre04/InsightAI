@@ -177,9 +177,7 @@ def scatter_plot(df, numeric_columns):
 
     return save_chart(f"{x}_vs_{y}_scatter.png")
 
-# ======================================================
-# CORRELATION HEATMAP
-# ======================================================
+
 
 def correlation_heatmap(df):
 
@@ -205,9 +203,6 @@ def correlation_heatmap(df):
 
     return save_chart("correlation_heatmap.png")
 
-# ======================================================
-# LINE CHART
-# ======================================================
 
 def line_chart(df):
 
@@ -252,9 +247,7 @@ def line_chart(df):
 
     return save_chart(f"{value_column}_trend.png")
 
-# ======================================================
-# BAR CHART
-# ======================================================
+
 
 def bar_chart(df, column):
 
@@ -287,9 +280,7 @@ def bar_chart(df, column):
     return save_chart(f"{column}_bar_chart.png")
 
 
-# ======================================================
-# PIE CHART
-# ======================================================
+
 
 def pie_chart(df, column):
 
@@ -318,9 +309,6 @@ def pie_chart(df, column):
 
     return save_chart(f"{column}_pie_chart.png")
 
-# ======================================================
-# MAIN FUNCTION
-# ======================================================
 
 def generate_visualizations(df: pd.DataFrame):
 
@@ -328,9 +316,7 @@ def generate_visualizations(df: pd.DataFrame):
 
     numeric_columns = get_numeric_columns(df)
 
-    # ------------------------------------------
-    # Histogram & Boxplot
-    # ------------------------------------------
+    
 
     for column in numeric_columns:
 
@@ -348,10 +334,7 @@ def generate_visualizations(df: pd.DataFrame):
         except Exception as e:
             print(f"Boxplot Error ({column}): {e}")
 
-    # ------------------------------------------
-    # Scatter Plot
-    # ------------------------------------------
-
+    
     try:
         chart = scatter_plot(df, numeric_columns)
 
@@ -361,9 +344,7 @@ def generate_visualizations(df: pd.DataFrame):
     except Exception as e:
         print(f"Scatter Error: {e}")
 
-    # ------------------------------------------
-    # Correlation Heatmap
-    # ------------------------------------------
+   
 
     try:
         chart = correlation_heatmap(df)
@@ -374,9 +355,6 @@ def generate_visualizations(df: pd.DataFrame):
     except Exception as e:
         print(f"Heatmap Error: {e}")
 
-    # ------------------------------------------
-    # Line Chart
-    # ------------------------------------------
 
     try:
         chart = line_chart(df)
@@ -387,9 +365,6 @@ def generate_visualizations(df: pd.DataFrame):
     except Exception as e:
         print(f"Line Chart Error: {e}")
 
-    # ------------------------------------------
-    # Missing Values Chart
-    # ------------------------------------------
 
     try:
         chart = missing_values_chart(df)
@@ -400,9 +375,7 @@ def generate_visualizations(df: pd.DataFrame):
     except Exception as e:
         print(f"Missing Values Chart Error: {e}")
 
-    # ------------------------------------------
-    # Bar Charts & Pie Charts
-    # ------------------------------------------
+   
 
     categorical_columns = get_categorical_columns(df)
 
