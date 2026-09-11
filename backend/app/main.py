@@ -6,7 +6,7 @@ from backend.app.api.upload import router as upload_router
 
 app = FastAPI()
 
-# Allow React Frontend
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -18,10 +18,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Upload API
+
 app.include_router(upload_router)
 
-# Serve generated charts
+
 app.mount("/reports", StaticFiles(directory="reports"), name="reports")
 
 
