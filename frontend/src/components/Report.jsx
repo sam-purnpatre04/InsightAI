@@ -55,9 +55,7 @@ function Report({ report, data }) {
 
       let position = margin;
 
-      /* -----------------------------------------
-         FIRST PAGE
-      ----------------------------------------- */
+     
 
       pdf.addImage(
         imgData,
@@ -72,10 +70,7 @@ function Report({ report, data }) {
         pdfHeight - margin * 2;
 
 
-      /* -----------------------------------------
-         ADDITIONAL PAGES
-      ----------------------------------------- */
-
+     
       while (heightLeft > 0) {
 
         position =
@@ -100,10 +95,7 @@ function Report({ report, data }) {
       }
 
 
-      /* -----------------------------------------
-         SAVE
-      ----------------------------------------- */
-
+     
       pdf.save(
         "InsightAI_Complete_Analysis_Report.pdf"
       );
@@ -151,9 +143,6 @@ function Report({ report, data }) {
     <div className="report-container">
 
 
-      {/* ==========================================
-          REPORT HEADER
-      ========================================== */}
 
       <div className="report-header">
 
@@ -187,17 +176,11 @@ function Report({ report, data }) {
       </div>
 
 
-      {/* ==========================================
-          EVERYTHING INSIDE THIS DIV
-          WILL GO INTO THE PDF
-      ========================================== */}
 
       <div id="pdf-report">
 
 
-        {/* ==========================================
-            BRAND HEADER
-        ========================================== */}
+       
 
         <div className="pdf-brand">
 
@@ -212,10 +195,6 @@ function Report({ report, data }) {
 
         </div>
 
-
-        {/* ==========================================
-            DATASET OVERVIEW
-        ========================================== */}
 
         <div className="report-section">
 
@@ -265,10 +244,7 @@ function Report({ report, data }) {
         </div>
 
 
-        {/* ==========================================
-            DATA QUALITY
-        ========================================== */}
-
+       
         <div className="report-section">
 
           <h2>
@@ -320,9 +296,7 @@ function Report({ report, data }) {
         </div>
 
 
-        {/* ==========================================
-            BUSINESS INSIGHTS
-        ========================================== */}
+        
 
         <div className="report-section">
 
@@ -365,10 +339,6 @@ function Report({ report, data }) {
 
         </div>
 
-
-        {/* ==========================================
-            OUTLIERS
-        ========================================== */}
 
         <div className="report-section">
 
@@ -443,10 +413,7 @@ function Report({ report, data }) {
         </div>
 
 
-        {/* ==========================================
-            EXECUTIVE SUMMARY
-        ========================================== */}
-
+        
         <div className="report-section">
 
           <h2>
@@ -474,9 +441,6 @@ function Report({ report, data }) {
         </div>
 
 
-        {/* ==========================================
-            VISUAL ANALYSIS
-        ========================================== */}
 
         <div className="report-section">
 
@@ -530,10 +494,7 @@ function Report({ report, data }) {
         </div>
 
 
-        {/* ==========================================
-            FOOTER
-        ========================================== */}
-
+        
         <div className="pdf-footer">
 
           <p>
