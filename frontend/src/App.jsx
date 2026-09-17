@@ -44,7 +44,7 @@ function App() {
 
       </header>
 
-      {/* Upload Section */}
+      
 
       <section className="upload-wrapper">
 
@@ -52,7 +52,6 @@ function App() {
 
       </section>
 
-      {/* Dashboard */}
 
       {data && (
 
