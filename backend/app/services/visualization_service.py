@@ -9,9 +9,6 @@ import seaborn as sns
 
 warnings.filterwarnings("ignore")
 
-# ======================================================
-# CONFIGURATION
-# ======================================================
 
 REPORT_FOLDER = "reports"
 
@@ -26,9 +23,6 @@ plt.rcParams["axes.titlesize"] = 16
 plt.rcParams["axes.labelsize"] = 12
 
 
-# ======================================================
-# SAVE CHART
-# ======================================================
 
 def save_chart(filename):
 

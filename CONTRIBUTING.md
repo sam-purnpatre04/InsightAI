@@ -1,4 +1,4 @@
 # Contributing
 
 
-At the moment, this project is under active development.
+At the moment, this project is Patially completed.
