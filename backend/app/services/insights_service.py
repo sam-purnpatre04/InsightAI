@@ -481,7 +481,7 @@ def generate_insights(
 
     insights = []
 
-    # Dataset Summary
+    
     generate_dataset_summary(
         df,
         dataset_profile,
@@ -489,37 +489,37 @@ def generate_insights(
         insights
     )
 
-    # Missing Values
+    
     generate_missing_value_insights(
         dataset_profile,
         insights
     )
 
-    # Duplicate Rows
+   
     generate_duplicate_insights(
         cleaning_summary,
         insights
     )
 
-    # Sales Analysis
+    
     generate_sales_insights(
         df,
         insights
     )
 
-    # Profit Analysis
+    
     generate_profit_insights(
         df,
         insights
     )
 
-    # Discount Analysis
+    
     generate_discount_insights(
         df,
         insights
     )
 
-    # Category Analysis
+    
     generate_category_insights(
         df,
         insights
