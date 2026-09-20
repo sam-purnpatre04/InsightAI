@@ -106,10 +106,7 @@ def generate_dataset_summary(
     })
 
 
-# =====================================================
-# =====================================================
-# MISSING VALUE INSIGHTS
-# =====================================================
+
 
 def generate_missing_value_insights(
     dataset_profile,
@@ -197,9 +194,6 @@ def generate_missing_value_insights(
         })
 
 
-# =====================================================
-# DUPLICATE INSIGHTS
-# =====================================================
 
 def generate_duplicate_insights(
     cleaning_summary,
@@ -234,9 +228,7 @@ def generate_duplicate_insights(
                 f"{duplicates:,} duplicate rows "
                 f"were removed."
         })
-# =====================================================
-# SALES INSIGHTS
-# =====================================================
+
 
 def generate_sales_insights(df, insights):
 
@@ -287,9 +279,6 @@ def generate_sales_insights(df, insights):
 
     })
 
-# =====================================================
-# PROFIT INSIGHTS
-# =====================================================
 
 def generate_profit_insights(df, insights):
 
@@ -354,9 +343,6 @@ def generate_profit_insights(df, insights):
                 "No loss-making transactions were found."
 
         })
-# =====================================================
-# DISCOUNT INSIGHTS
-# =====================================================
 
 def generate_discount_insights(df, insights):
 
@@ -394,9 +380,6 @@ def generate_discount_insights(df, insights):
 
     })
 
-# =====================================================
-# CATEGORY INSIGHTS
-# =====================================================
 
 def generate_category_insights(df, insights):
 
