@@ -2,9 +2,7 @@ import pandas as pd
 import numpy as np
 
 
-# =====================================================
-# COLUMN DETECTION
-# =====================================================
+
 
 def find_column(df, keywords):
     """
@@ -24,9 +22,7 @@ def find_column(df, keywords):
     return None
 
 
-# =====================================================
-# DATA QUALITY SCORE
-# =====================================================
+
 
 def calculate_data_quality(df, cleaning_summary):
 
@@ -59,9 +55,7 @@ def calculate_data_quality(df, cleaning_summary):
     return score
 
 
-# =====================================================
-# DATASET SUMMARY
-# =====================================================
+
 
 def generate_dataset_summary(
     df,
