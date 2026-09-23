@@ -83,25 +83,25 @@ def generate_eda(df: pd.DataFrame):
 
     for column in numeric_df.columns:
 
-        # Remove missing values
+        
         series = numeric_df[column].dropna()
 
-        # Need enough data to calculate meaningful quartiles
+        
         if len(series) < 4:
             continue
 
-        # Calculate quartiles
+       
         q1 = series.quantile(0.25)
         q3 = series.quantile(0.75)
 
-        # Calculate IQR
+        
         iqr = q3 - q1
 
-        # Calculate boundaries
+        
         lower_bound = q1 - (1.5 * iqr)
         upper_bound = q3 + (1.5 * iqr)
 
-        # Identify outliers
+        
         outliers = series[
             (series < lower_bound) |
             (series > upper_bound)
@@ -154,9 +154,7 @@ def generate_eda(df: pd.DataFrame):
             )
         }
 
-    # =====================================================
-    # RETURN EDA
-    # =====================================================
+    
 
     return {
 
