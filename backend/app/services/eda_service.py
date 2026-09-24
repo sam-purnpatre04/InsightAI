@@ -8,10 +8,7 @@ def generate_eda(df: pd.DataFrame):
     statistics, correlations, and outlier detection.
     """
 
-    # =====================================================
-    # NUMERICAL SUMMARY
-    # =====================================================
-
+ 
     numerical_summary = (
         df.describe()
         .round(2)
@@ -19,10 +16,7 @@ def generate_eda(df: pd.DataFrame):
         .to_dict()
     )
 
-    # =====================================================
-    # CATEGORICAL SUMMARY
-    # =====================================================
-
+   
     categorical_summary = {}
 
     categorical_columns = df.select_dtypes(
@@ -53,10 +47,7 @@ def generate_eda(df: pd.DataFrame):
             )
         }
 
-    # =====================================================
-    # CORRELATION MATRIX
-    # =====================================================
-
+   
     numeric_df = df.select_dtypes(
         include=["number"]
     )
@@ -75,9 +66,7 @@ def generate_eda(df: pd.DataFrame):
 
         correlation_matrix = {}
 
-    # =====================================================
-    # OUTLIER DETECTION
-    # =====================================================
+    
 
     outlier_summary = {}
 
