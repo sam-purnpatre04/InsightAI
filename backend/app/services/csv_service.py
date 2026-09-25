@@ -76,22 +76,14 @@ def read_csv(upload_file):
 
     eda = generate_eda(cleaned_df)
 
-    # -----------------------------
-    # Charts
-    # -----------------------------
+   
 
     charts = generate_visualizations(cleaned_df)
 
-    # -----------------------------
-    # Machine Learning Analysis
-    # -----------------------------
-
+    
     ml_analysis = generate_ml_analysis(cleaned_df)
 
-    # -----------------------------
-    # AI / Business Insights
-    # -----------------------------
-
+    
     insights = generate_insights(
         cleaned_df,
         dataset_profile,
@@ -99,10 +91,7 @@ def read_csv(upload_file):
         eda
     )
 
-    # -----------------------------
-    # Final Report
-    # -----------------------------
-
+    
     report = generate_report(
         upload_file.filename,
         dataset_profile,
@@ -111,9 +100,7 @@ def read_csv(upload_file):
         insights
     )
 
-    # -----------------------------
-    # Response
-    # -----------------------------
+    
 
     return {
         "filename": upload_file.filename,
