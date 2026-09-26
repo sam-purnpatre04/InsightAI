@@ -17,10 +17,6 @@ def read_csv(upload_file):
     and report generation.
     """
 
-    # -----------------------------
-    # Read CSV with multiple encodings
-    # -----------------------------
-
     encodings = [
         "utf-8",
         "utf-8-sig",
@@ -58,21 +54,13 @@ def read_csv(upload_file):
             f"Unable to read uploaded CSV.\n{last_error}"
         )
 
-    # -----------------------------
-    # Dataset Profile
-    # -----------------------------
+   
 
     dataset_profile = get_dataset_profile(df)
 
-    # -----------------------------
-    # Cleaning
-    # -----------------------------
-
+    
     cleaned_df, cleaning_summary = clean_dataset(df)
 
-    # -----------------------------
-    # Exploratory Data Analysis
-    # -----------------------------
 
     eda = generate_eda(cleaned_df)
 
