@@ -18,9 +18,7 @@ def standardize_column_names(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def remove_duplicates(df: pd.DataFrame):
-    """
-    Remove duplicate rows from the dataset.
-    """
+    
 
     duplicates_removed = int(df.duplicated().sum())
 
