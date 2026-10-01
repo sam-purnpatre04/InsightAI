@@ -32,5 +32,4 @@ function ImageModal({ image, title, onClose }) {
     );
 
 }
-
 export default ImageModal;
