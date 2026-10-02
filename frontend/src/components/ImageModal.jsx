@@ -28,8 +28,6 @@ function ImageModal({ image, title, onClose }) {
             </div>
 
         </div>
-
     );
-
 }
 export default ImageModal;
