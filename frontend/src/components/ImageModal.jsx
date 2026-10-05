@@ -1,9 +1,7 @@
 import "./ImageModal.css";
 
 function ImageModal({ image, title, onClose }) {
-
     if (!image) return null;
-
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div
