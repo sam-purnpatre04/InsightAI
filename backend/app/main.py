@@ -24,7 +24,6 @@ app.include_router(upload_router)
 
 app.mount("/reports", StaticFiles(directory="reports"), name="reports")
 
-
 @app.get("/")
 def home():
     return {
