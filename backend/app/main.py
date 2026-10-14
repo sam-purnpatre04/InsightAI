@@ -18,9 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 app.include_router(upload_router)
-
 
 app.mount("/reports", StaticFiles(directory="reports"), name="reports")
 
