@@ -12,7 +12,6 @@ function Dashboard({ data }) {
   const [activeTab, setActiveTab] = useState("overview");
 
   if (!data) return null;
-
   return (
 
     <div className="dashboard-container">
