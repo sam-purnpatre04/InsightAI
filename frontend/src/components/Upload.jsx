@@ -13,7 +13,6 @@ function Upload({ setData }) {
       alert("Please select a CSV file.");
       return;
     }
-
     try {
 
       setLoading(true);
