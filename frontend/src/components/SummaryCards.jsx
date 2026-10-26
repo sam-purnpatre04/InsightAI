@@ -11,7 +11,6 @@ function SummaryCards({ profile, cleaning }) {
         <h3>Total Rows</h3>
         <p>{profile.rows}</p>
       </div>
-
       <div className="card">
         <div className="icon">📊</div>
         <h3>Total Columns</h3>
