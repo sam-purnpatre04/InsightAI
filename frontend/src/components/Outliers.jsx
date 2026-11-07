@@ -15,9 +15,7 @@ function Outliers({ outliers }) {
       </div>
     );
   }
-
   const getSeverity = (percentage) => {
-
     if (percentage >= 5) {
       return {
         label: "High",
