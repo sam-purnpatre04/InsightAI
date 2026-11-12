@@ -4,7 +4,6 @@
     gap:22px;
     margin:35px 0;
 }
-
 .card{
     background:#ffffff;
     border-radius:15px;
@@ -14,7 +13,6 @@
     transition:0.3s ease;
     border-top:5px solid #2563eb;
 }
-
 .card:hover{
     transform:translateY(-6px);
     box-shadow:0 12px 25px rgba(0,0,0,0.12);
