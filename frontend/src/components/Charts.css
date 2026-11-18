@@ -68,9 +68,7 @@
     grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
 
     gap:30px;
-
 }
-
 .chart-card{
 
     background:white;
