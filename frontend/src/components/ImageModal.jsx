@@ -16,7 +16,6 @@ function ImageModal({ image, title, onClose }) {
                 </button>
 
                 <h2>{title}</h2>
-
                 <img
                     src={image}
                     alt={title}
