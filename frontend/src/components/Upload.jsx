@@ -14,7 +14,6 @@ function Upload({ setData }) {
       return;
     }
     try {
-
       setLoading(true);
 
       const result = await uploadDataset(file);
